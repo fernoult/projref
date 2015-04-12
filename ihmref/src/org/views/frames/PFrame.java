@@ -32,19 +32,19 @@ import com.sun.awt.AWTUtilities;
 
 public class PFrame extends JFrame{
 
-	private String _name;
+	protected String _name;
 	
-	private JPanel _northPane;
+	protected JPanel _northPane;
 	
-	private JPanel _centerPane;
+	protected JPanel _centerPane;
 	
-	private JPanel _southPane;
+	protected JPanel _southPane;
 	
-	private ArrayList<PFrame> _frames = new ArrayList<>();
+	protected ArrayList<PFrame> _frames = new ArrayList<>();
 	
-	private JToolBar _toolBar;
+	protected JToolBar _toolBar;
 	
-	private Ressources _ressources = Ressources.getInstance();
+	protected Ressources _ressources = Ressources.getInstance();
 	
 	
 	

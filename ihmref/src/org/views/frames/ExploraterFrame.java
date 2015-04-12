@@ -7,6 +7,7 @@
  */
 package org.views.frames;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -52,6 +53,7 @@ public class ExploraterFrame extends AppFrame {
 	
 	public ExploraterFrame(String title_){
 		super();
+		setTitle(title_);
 		initPFrame();
 	}
 	
@@ -88,6 +90,7 @@ public class ExploraterFrame extends AppFrame {
 		
 		// Comportement de base de la fenetre.
 		setSize(_width, _height);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/views/images/explo.png")));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(ExploraterFrame.EXIT_ON_CLOSE);
 	}
@@ -95,7 +98,7 @@ public class ExploraterFrame extends AppFrame {
 	@Override
 	protected void initPanels() {
 		
-		get_northPane().add(get_toolBar());
+		_northPane.add(_toolBar);
 		
 	}
 	
@@ -148,10 +151,10 @@ public class ExploraterFrame extends AppFrame {
 		
 		// ============= TOOLBAR =================
 
-		get_toolBar().add(_prefs);
-		get_toolBar().add(_newObj);
-		get_toolBar().add(_newList);
-		get_toolBar().add(_exit);
+		_toolBar.add(_prefs);
+		_toolBar.add(_newObj);
+		_toolBar.add(_newList);
+		_toolBar.add(_exit);
 		
 	}
 	
@@ -167,10 +170,5 @@ public class ExploraterFrame extends AppFrame {
 		return  JOptionPane.showConfirmDialog(null, "Etes vous sur de vouloir quitter l'application?", "CONFIRM", JOptionPane.WARNING_MESSAGE);
 	}
 
-	
-	private void saveState(){
-		
-		System.out.println("Sauvegarde diverses.");
-	}
 	
 }

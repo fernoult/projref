@@ -10,6 +10,7 @@ package org.views.frames;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 
@@ -39,9 +40,10 @@ public class LafFrame extends TabFrame {
 		super.initPFrame();
 		
 		LafPane centerPane = new LafPane(lafTF_, this);
-		get_centerPane().add(centerPane, BorderLayout.CENTER);
-		add(get_centerPane());
+		_centerPane.add(centerPane, BorderLayout.CENTER);
+		add(_centerPane);
 		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/views/images/lnf.png")));
 		setSize(310, 470);
 		if (_parentLocation != null) {
 			setLocation(_parentLocation);			
