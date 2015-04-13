@@ -36,6 +36,7 @@ public class ThemesPane extends JPanel {
 	private JLabel _themeLB;
 	private JTextField _themeTF;
 	private JButton _themeBT;
+	private String _theme = "";
 	
 	/** Objet Point pour la position du curseur. */
 	private Point _location;
@@ -52,9 +53,10 @@ public class ThemesPane extends JPanel {
 	 * ThemesPane
 	 * Constructeur
 	 */
-	public ThemesPane(PFrame parentFrame_){
+	public ThemesPane(PFrame parentFrame_, String theme_){
 		super();
 		setParentFrame(parentFrame_);
+		set_theme(theme_);
 		initPane();
 		
 	}
@@ -112,6 +114,7 @@ public class ThemesPane extends JPanel {
 		
 		_themeLB = new JLabel("Look And Feel : ");														// On instancie le label
 		_themeTF = new JTextField(20);																	// On instancie le TextField.
+		_themeTF.setText(_theme);
 		_themeBT = new JButton(new ImageIcon(getClass().getResource("/org/views/images/lnf.png")));		// On instancie le bouton avec son icone.
 		_themeBT.addMouseListener(new MouseListener() {													// On positionne un ActionListner sur l'action du bouton.
 			
@@ -250,6 +253,19 @@ public class ThemesPane extends JPanel {
 	 */
 	public void setLocation(Point location_) {
 		_location = location_;
+	}
+
+	public String get_theme() {
+		return _theme;
+	}
+
+	public void set_theme(String theme_) {
+		if (!theme_.equals("null")) {
+			this._theme = theme_;
+		}else {
+			this._theme = "pas de themes prefere.";
+		}
+		
 	}
 	
 	

@@ -33,10 +33,10 @@ public class IHMAccess {
 
 	public static void main(String[] args) {
 		
+//		System.out.println(Ressources.getInstance().getPrefs().get("LANGUE", "null"));
+		
 		setDefaultLAF();
 		new ExploraterFrame("EXPLO");
-		System.out.println("JTattoo " + About.JTATTOO_VERSION);
-//		displayAllLAF();
 		
 	}
 	
@@ -45,8 +45,16 @@ public class IHMAccess {
 		try {
 			
 			// On positione le LAF par defaut.
-			UIManager.setLookAndFeel(new FastLookAndFeel());
-			System.out.println("LAF configure : " + FastLookAndFeel.class.getName());
+			String laf = Ressources.getInstance().getPrefs().get("THEME", "null");
+			try {
+				UIManager.setLookAndFeel(laf);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
 			
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();

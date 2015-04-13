@@ -10,6 +10,7 @@ package org;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 public class Ressources {
 
@@ -17,6 +18,7 @@ public class Ressources {
 	private String[] LAF_LIST; 
 	private static String LAF_PATH = Ressources.class.getPackage().getName() + ".Laf";
 	private static ResourceBundle BUNDLE = ResourceBundle.getBundle(LAF_PATH);
+	private Preferences PREFS = Preferences.userNodeForPackage(IHMAccess.class);
 	
 	private Ressources(){
 		
@@ -46,5 +48,9 @@ public class Ressources {
 	
 	public String getPrefixLaf(){
 		return BUNDLE.getString("laf.dispo.prefix.value");
+	}
+	
+	public Preferences getPrefs(){
+		return PREFS;
 	}
 }

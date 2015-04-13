@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -75,8 +77,7 @@ public class PrefsFrame extends AppFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// TODO : Solution un peu foireuse, a refaire mieux que ca!
-				IHMAccess.setLAF(((ThemesPane) _themesPane).getThemeTF().getText());
+				updatePrefs();
 				dispose();
 			}
 		});
@@ -89,8 +90,8 @@ public class PrefsFrame extends AppFrame {
 	protected void initPanels() {
 		
 		// zone Skin
-		_themesPane = new ThemesPane(this);
-		_languesPane = new LanguePane(this);
+		_themesPane = new ThemesPane(this, _ressources.getPrefs().get("THEME", "null"));
+		_languesPane = new LanguePane(this, _ressources.getPrefs().get("LANGUE", "null"));
 		
 		_centerPane.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -130,7 +131,18 @@ public class PrefsFrame extends AppFrame {
 	 * void
 	 */
 	private void updatePrefs(){
-		
+		System.out.println("update preferences");
+		Preferences prefs = _ressources.getPrefs();
+		try {
+			System.out.println("LAF : " + ((ThemesPane) _themesPane).getThemeTF().getText());
+			System.out.println("LANG : " + ((LanguePane) _languesPane).get_locale());
+			prefs.put("THEME", ((ThemesPane) _themesPane).getThemeTF().getText());
+			prefs.put("LANGUE", ((LanguePane) _languesPane).get_locale());
+			prefs.flush();
+			System.out.println("fin de maj preferences OK ");
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/** Methode getLafTF();
