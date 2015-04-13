@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import org.Ressources;
+import org.views.Ressources;
 
 import com.sun.awt.AWTUtilities;
 

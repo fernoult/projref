@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-import org.Ressources;
+import org.views.Ressources;
 
 import com.sun.awt.AWTUtilities;
 

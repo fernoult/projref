@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
-import org.Ressources;
+import org.views.Ressources;
 
 public class AppFrame extends PFrame {
 	

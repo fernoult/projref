@@ -10,6 +10,7 @@ package org;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.views.Ressources;
 import org.views.frames.ExploraterFrame;
 import org.views.frames.ObjFrame;
 
@@ -78,36 +79,6 @@ public class IHMAccess {
 			e.printStackTrace();
 		}
 
-	}
-	
-	private static void displayAllLAF(){
-		String[] lafs = Ressources.getInstance().getLafAvaible();
-		String prefixe = Ressources.getInstance().getPrefixLaf();
-		
-		for (int i = 0; i < lafs.length; i++) {
-			
-			String laf = prefixe + lafs[i].trim();
-			System.out.println(laf);
-			try {
-				
-				// On positione le LAF selectionne.
-				UIManager.setLookAndFeel(laf);
-				
-			} catch (UnsupportedLookAndFeelException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-
-			new ObjFrame("LAF : " + lafs[i]);
-			
-		}
-	}
-	
-	
+	}	
 
 }

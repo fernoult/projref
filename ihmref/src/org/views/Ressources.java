@@ -5,18 +5,20 @@
  *
  * FIN HISTORIQUE
  */
-package org;
+package org.views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
+import org.IHMAccess;
+
 public class Ressources {
 
 	private static Ressources RES_INSTANCE;
 	private String[] LAF_LIST; 
-	private static String LAF_PATH = Ressources.class.getPackage().getName() + ".Laf";
+	private static String LAF_PATH = Ressources.class.getPackage().getName() + ".Libelles";
 	private static ResourceBundle BUNDLE = ResourceBundle.getBundle(LAF_PATH);
 	private Preferences PREFS = Preferences.userNodeForPackage(IHMAccess.class);
 	

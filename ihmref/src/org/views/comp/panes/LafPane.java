@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import org.Ressources;
+import org.views.Ressources;
 import org.views.comp.table.LafTable;
 import org.views.comp.table.models.LafTableModel;
 import org.views.comp.table.renderer.LafRowsTableRenderer;
