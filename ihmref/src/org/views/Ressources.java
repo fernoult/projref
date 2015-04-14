@@ -9,6 +9,7 @@ package org.views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
@@ -18,9 +19,10 @@ public class Ressources {
 
 	private static Ressources RES_INSTANCE;
 	private String[] LAF_LIST; 
-	private static String LAF_PATH = Ressources.class.getPackage().getName() + ".Libelles";
-	private static ResourceBundle BUNDLE = ResourceBundle.getBundle(LAF_PATH);
-	private Preferences PREFS = Preferences.userNodeForPackage(IHMAccess.class);
+	private static String LAF_PATH = Ressources.class.getPackage().getName() + ".Laf";
+	private static String LIBELLES_PATH = Ressources.class.getPackage().getName() + ".Libelles";
+	private ViewPrefs PREFS = ViewPrefs.getInstance();
+	
 	
 	private Ressources(){
 		
@@ -35,12 +37,23 @@ public class Ressources {
 		return RES_INSTANCE;
 	}
 	
+	public String getLibelleValue(String key_){
+		
+		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+	}
+	
+	public String getLafValue(String key_){
+		return ResourceBundle.getBundle(LAF_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+	}
+	
 	public Dimension getSreenSize(){
 		return Toolkit.getDefaultToolkit().getScreenSize();
 	}
 	
 	public String[] getLafAvaible(){
-		LAF_LIST = BUNDLE.getString("laf.dispo.list.values").split(" ");
+		
+		LAF_LIST = getInstance().getLafValue("laf.dispo.list.values").split(" ");
+		
 		for (int i = 0; i < LAF_LIST.length; i++) {
 			LAF_LIST[i] = LAF_LIST[i].trim();
 			System.out.println(LAF_LIST[i]);
@@ -49,10 +62,24 @@ public class Ressources {
 	}
 	
 	public String getPrefixLaf(){
-		return BUNDLE.getString("laf.dispo.prefix.value");
+		return getInstance().getLafValue("laf.dispo.prefix.value");// 
 	}
 	
-	public Preferences getPrefs(){
-		return PREFS;
+	public void updateLocale(Locale locale_){
+		
+		PREFS.updateLOC(locale_);
+	}
+	
+	public void updateLookAndFeel(String laf_){
+		
+		PREFS.updateLAF(laf_);
+	}
+	
+	public void setLocale(Locale locale_){
+		
+	}
+	
+	public void setLookAndFeel(String laf_){
+		
 	}
 }

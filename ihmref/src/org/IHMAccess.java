@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.views.Ressources;
+import org.views.ViewPrefs;
 import org.views.frames.ExploraterFrame;
 import org.views.frames.ObjFrame;
 
@@ -36,6 +37,7 @@ public class IHMAccess {
 		
 //		System.out.println(Ressources.getInstance().getPrefs().get("LANGUE", "null"));
 		
+		ViewPrefs.getInstance().initPrefs();
 		setDefaultLAF();
 		new ExploraterFrame("EXPLO");
 		
@@ -46,7 +48,7 @@ public class IHMAccess {
 		try {
 			
 			// On positione le LAF par defaut.
-			String laf = Ressources.getInstance().getPrefs().get("THEME", "null");
+			String laf = ViewPrefs.getInstance().getLAF();
 			try {
 				UIManager.setLookAndFeel(laf);
 			} catch (ClassNotFoundException e) {

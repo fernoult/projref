@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -26,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.IHMAccess;
+import org.views.Ressources;
+import org.views.ViewPrefs;
 import org.views.comp.panes.LanguePane;
 import org.views.comp.panes.ThemesPane;
 
@@ -71,7 +74,7 @@ public class PrefsFrame extends AppFrame {
 		
 
 		
-		_applyBT = new JButton("Appliquer les changements");
+		_applyBT = new JButton(Ressources.getInstance().getLibelleValue("prefs.submit.button.text"));
 		_applyBT.addActionListener(new ActionListener() {
 			
 			@Override
@@ -90,8 +93,8 @@ public class PrefsFrame extends AppFrame {
 	protected void initPanels() {
 		
 		// zone Skin
-		_themesPane = new ThemesPane(this, _ressources.getPrefs().get("THEME", "null"));
-		_languesPane = new LanguePane(this, _ressources.getPrefs().get("LANGUE", "null"));
+		_themesPane = new ThemesPane(this, ViewPrefs.getInstance().getLAF());
+		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		_centerPane.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -131,18 +134,11 @@ public class PrefsFrame extends AppFrame {
 	 * void
 	 */
 	private void updatePrefs(){
+		
 		System.out.println("update preferences");
-		Preferences prefs = _ressources.getPrefs();
-		try {
-			System.out.println("LAF : " + ((ThemesPane) _themesPane).getThemeTF().getText());
-			System.out.println("LANG : " + ((LanguePane) _languesPane).get_locale());
-			prefs.put("THEME", ((ThemesPane) _themesPane).getThemeTF().getText());
-			prefs.put("LANGUE", ((LanguePane) _languesPane).get_locale());
-			prefs.flush();
-			System.out.println("fin de maj preferences OK ");
-		} catch (BackingStoreException e) {
-			e.printStackTrace();
-		}
+		
+		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
+		ViewPrefs.getInstance().updateLAF(((ThemesPane) _themesPane).getThemeTF().getText());
 	}
 	
 	/** Methode getLafTF();
