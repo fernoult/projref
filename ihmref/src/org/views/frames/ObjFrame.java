@@ -4,6 +4,8 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
+import org.views.Ressources;
+
 public class ObjFrame extends AppFrame{
 
 	public ObjFrame() {
@@ -13,6 +15,7 @@ public class ObjFrame extends AppFrame{
 	
 	public ObjFrame(String title_){
 		super();
+		title_ = Ressources.getInstance().getLibelleValue("frame.obj.title.text");
 		setTitle(title_);
 	}
 

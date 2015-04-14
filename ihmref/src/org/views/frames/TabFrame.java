@@ -2,6 +2,8 @@ package org.views.frames;
 
 import java.awt.Toolkit;
 
+import org.views.Ressources;
+
 import com.jtattoo.plaf.About;
 import com.jtattoo.plaf.JTattooUtilities;
 
@@ -14,6 +16,7 @@ public class TabFrame extends AppFrame {
 
 	public TabFrame(String title_){
 		super();
+		title_ = Ressources.getInstance().getLibelleValue("frame.tab.title.text");
 		setTitle(title_);
 	}
 

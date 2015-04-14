@@ -44,15 +44,24 @@ public class PrefsFrame extends AppFrame {
 	private JPanel _themesPane;
 	private JPanel _languesPane;
 	
+	private ExploraterFrame _explorater;
+	
 	public PrefsFrame() {
 		super();
 	}
+	
 	public PrefsFrame(String title_){
 		super();
 		setTitle(title_);
 		initPFrame();
 	}
 
+	public PrefsFrame(String title_, ExploraterFrame explorater_){
+		super();
+		setTitle(title_);
+		set_explorater(explorater_);
+		initPFrame();
+	}
 	
 	@Override
 	protected void initPFrame() {
@@ -139,6 +148,17 @@ public class PrefsFrame extends AppFrame {
 		
 		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
 		ViewPrefs.getInstance().updateLAF(((ThemesPane) _themesPane).getThemeTF().getText());
+		
+		if (_explorater != null) {
+			System.out.println("GNEEEEEEEEEEEEEEE");
+			ArrayList<PFrame> liste = _explorater.get_frames();
+			for (Iterator<PFrame> iterator = liste.iterator(); iterator.hasNext();) {
+				PFrame pFrame = (PFrame) iterator.next();
+				pFrame.revalidate();
+				pFrame.repaint();
+			}
+		}
+		
 	}
 	
 	/** Methode getLafTF();
@@ -261,6 +281,17 @@ public class PrefsFrame extends AppFrame {
 	public void setLanguesPane(JPanel languesPane_) {
 		_languesPane = languesPane_;
 	}
+	
+	
+	
+	public ExploraterFrame get_explorater() {
+		return _explorater;
+	}
+
+	public void set_explorater(ExploraterFrame _explorater) {
+		this._explorater = _explorater;
+	}
+
 	@Override
 	public void dispose() {
 		removeFrames();

@@ -140,11 +140,12 @@ public class ExploraterFrame extends AppFrame {
 		});
 		
 		_prefs = new JButton(new ImageIcon(getClass().getResource("/org/views/images/prefs.png")));
+		final ExploraterFrame explo = this;
 		_prefs.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				PrefsFrame laff = new PrefsFrame("PREFS");
+				PrefsFrame laff = new PrefsFrame("PREFS", explo);
 				addFrame(laff);
 			}
 		});
