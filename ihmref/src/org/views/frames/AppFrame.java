@@ -7,6 +7,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import org.views.Ressources;
+import org.views.ViewPrefs;
 
 public class AppFrame extends PFrame {
 	
@@ -20,14 +21,39 @@ public class AppFrame extends PFrame {
 			@Override
         	public void windowClosing(WindowEvent e) {
         		
+        		JOptionPane.setDefaultLocale(ViewPrefs.getInstance().getLocale());
+        		
+        		if (e.getSource().getClass().getName().equals("org.views.frames.ExploraterFrame")) {
+        			
+            		if ( confirmCloseApplication() == 0) {
+    					setDefaultCloseOperation(EXIT_ON_CLOSE);
+    					dispose();
+    				}else {
+    					setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+					}
+        			
+				}else {
+					
+					if (get_frames().size() > 0 ) {
+						
+		        		int rep = JOptionPane.showConfirmDialog(null, Ressources.getInstance().getLibelleValue("frame.confirm.close.message.text"), 
+		        				Ressources.getInstance().getLibelleValue("frame.confirm.title.text"), JOptionPane.WARNING_MESSAGE);
+		        		if ( rep == 0) {
+							setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+						}else {
+
+		        			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+						}
+					}else {
+						dispose();
+					}
+
+					
+				}
         		// Si le traitement n'est pas encore termin�, on interdit de fermer la fen�tre avec la croix.
         		// et on affiche une fen�tre d'avertissement avec message + possibilit� d'annuler proprement la requ�te.
-        		int rep = JOptionPane.showConfirmDialog(null, "La fermeture de cette fenetre entrainera\n la fermeture de ses fenetres associees.", "CONFIRM", JOptionPane.WARNING_MESSAGE);
-        		if ( rep == 0) {
-					setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				}else {
-        			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-				}
+        		
+
 
         	}
 		});
@@ -67,9 +93,16 @@ public class AppFrame extends PFrame {
 	public void dispose() {
 		super.dispose();
 		// ferme ses fenetre filles
-		System.out.println("Fermeture des fenetres filles.");
 		if (get_frames() != null) {
 			notifyFrames();
 		}
 	}
+	
+	protected int confirmCloseApplication(){
+		
+		JOptionPane.setDefaultLocale(ViewPrefs.getInstance().getLocale());
+		return  JOptionPane.showConfirmDialog(null, Ressources.getInstance().getLibelleValue("appli.confirm.close.message.text"), 
+				Ressources.getInstance().getLibelleValue("frame.confirm.title.text"), JOptionPane.WARNING_MESSAGE);
+	}
+	
 }

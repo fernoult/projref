@@ -25,7 +25,7 @@ public class TabFrame extends AppFrame {
 		super.initPFrame();
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/views/images/list.png")));
-		setSize(700, 700);
+		setSize(250, 200);
 		setDefaultCloseOperation(ObjFrame.DISPOSE_ON_CLOSE);
 		
 	}

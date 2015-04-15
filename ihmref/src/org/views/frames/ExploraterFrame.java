@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import org.views.Ressources;
+import org.views.ViewPrefs;
 
 import com.sun.awt.AWTUtilities;
 
@@ -61,25 +62,23 @@ public class ExploraterFrame extends AppFrame {
 	protected void initPFrame() {
 		super.initPFrame();
 		
-        // Ajout de l'interdiction sur la croix.
-        addWindowListener(new WindowAdapter() {
-        	
-        	@SuppressWarnings("static-access")
-			@Override
-        	public void windowClosing(WindowEvent e) {
-        		
-        		// Si le traitement n'est pas encore termin�, on interdit de fermer la fen�tre avec la croix.
-        		// et on affiche une fen�tre d'avertissement avec message + possibilit� d'annuler proprement la requ�te.
-        		
-        		if ( confirmClose() == 0) {
-					setDefaultCloseOperation(EXIT_ON_CLOSE);
-					dispose();
-				}else {
-        			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-				}
-
-        	}
-		});
+//        // Ajout de l'interdiction sur la croix.
+//        addWindowListener(new WindowAdapter() {
+//        	
+//        	@SuppressWarnings("static-access")
+//			@Override
+//        	public void windowClosing(WindowEvent e) {
+//        		
+//        		// Si le traitement n'est pas encore termin�, on interdit de fermer la fen�tre avec la croix.
+//        		// et on affiche une fen�tre d'avertissement avec message + possibilit� d'annuler proprement la requ�te.
+//        		
+//        		if ( confirmClose() == 0) {
+//					setDefaultCloseOperation(EXIT_ON_CLOSE);
+//					dispose();
+//				}
+//
+//        	}
+//		});
 		
 		// init des composants.
 		initComposants();
@@ -111,7 +110,7 @@ public class ExploraterFrame extends AppFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e_) {
-				if (confirmClose() == 0) {
+				if (confirmCloseApplication() == 0) {
 					dispose();					
 				}
 			}
@@ -167,8 +166,10 @@ public class ExploraterFrame extends AppFrame {
 
 	}
 	
-	private int confirmClose(){
-		return  JOptionPane.showConfirmDialog(null, "Etes vous sur de vouloir quitter l'application?", "CONFIRM", JOptionPane.WARNING_MESSAGE);
+	@Override
+	protected int confirmCloseApplication() {
+		// TODO Auto-generated method stub
+		return super.confirmCloseApplication();
 	}
 
 	
