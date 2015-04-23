@@ -7,6 +7,6 @@
  */
 package org.views.comp.elements;
 
-public class CBElement {
+public class CBElement{
 
 }
