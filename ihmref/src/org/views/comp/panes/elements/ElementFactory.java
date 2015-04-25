@@ -5,7 +5,7 @@
  *
  * FIN HISTORIQUE
  */
-package org.views.comp.elements;
+package org.views.comp.panes.elements;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

@@ -5,7 +5,7 @@
  *
  * FIN HISTORIQUE
  */
-package org.views.comp.elements;
+package org.views.comp.panes.elements;
 
 public class CBElement{
 
