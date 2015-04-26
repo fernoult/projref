@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FRAME>
+	<ZONE>
+		<COMP>TFElement</COMP>
+	</ZONE>
+	<ZONE>
+		<COMP>BTElement</COMP>
+		<COMP>TFElement</COMP>
+	</ZONE>
+</FRAME>
