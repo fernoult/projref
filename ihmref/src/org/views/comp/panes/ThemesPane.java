@@ -99,7 +99,7 @@ public class ThemesPane extends JPanel {
 		gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
 		add(_themeBT, gbc);											// Ajout du composant dans le GridBagLayout.
 		
-		setBorder(BorderFactory.createTitledBorder(Ressources.getInstance().getLibelleValue("prefs.pane.theme.cadre.value")));
+		
 		
 	}
 	
