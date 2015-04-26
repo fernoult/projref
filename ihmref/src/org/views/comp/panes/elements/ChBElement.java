@@ -7,6 +7,16 @@
  */
 package org.views.comp.panes.elements;
 
-public class ChBElement {
+import org.views.comp.panes.parents.ComposantPane;
 
+public class ChBElement extends ComposantPane{
+
+	/** ChBElement
+	 * Constructeur
+	 */
+	public ChBElement(String libelle_) {
+		super(libelle_);
+	}
+
+	
 }

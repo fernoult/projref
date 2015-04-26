@@ -7,6 +7,8 @@
  */
 package org.views.comp.panes.elements;
 
+import java.awt.Dimension;
+
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -14,7 +16,9 @@ import javax.swing.JButton;
 
 public class RButton extends JButton {
 
-	
+	private final int BTN_WIDTH_ICO = 25;
+	private final int BTN_HEIGHT = 25;
+	private final int BTN_WIDTH_TXT = 40;
 
 	/** RButton
 	 * Constructeur
@@ -28,6 +32,7 @@ public class RButton extends JButton {
 	 */
 	public RButton(Icon icon_) {
 		super(icon_);
+		setMinimumSize(new Dimension(BTN_WIDTH_ICO, BTN_HEIGHT));
 	}
 
 	/** RButton
@@ -42,7 +47,10 @@ public class RButton extends JButton {
 	 */
 	public RButton(String text_) {
 		super(text_);
+		setMinimumSize(new Dimension(BTN_WIDTH_TXT, BTN_HEIGHT));
 	}
+	
+	
 	
 	
 	

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 
 import org.views.Ressources;
 import org.views.comp.ElementEnum;
+import org.views.comp.panes.parents.ComposantPane;
 
 public class ElementFactory {
 
@@ -48,6 +49,30 @@ public class ElementFactory {
 			button.setIcon(icone);
 		}
 		return new JButton();
+	}
+	
+	public ComposantPane getElement(ElementEnum type_, String libelle_){
+		
+		ComposantPane comp = null;
+		
+		if (type_.equals(ElementEnum.BT_ELEMENT)) {
+			comp = new BTElement(libelle_);
+			
+		}else if (type_.equals(ElementEnum.CB_ELEMENT)) {
+			comp = new CBElement(libelle_);
+			
+		}else if (type_.equals(ElementEnum.ChB_ELEMENT)) {
+			comp = new ChBElement(libelle_);
+			
+		}else if (type_.equals(ElementEnum.RB_ELEMENT)) {
+			comp = new RBElement(libelle_);
+			
+		}else if (type_.equals(ElementEnum.TF_ELEMENT)) {
+			comp = new TFElement(libelle_);
+			
+		}
+		
+		return comp;
 	}
 	
 	
