@@ -12,6 +12,8 @@ import java.util.HashMap;
 import javax.swing.BorderFactory;
 
 import org.views.Ressources;
+import org.views.comp.ElementEnum;
+import org.views.comp.panes.elements.ElementFactory;
 
 public class ZonePane extends RPane {
 
@@ -20,14 +22,16 @@ public class ZonePane extends RPane {
 	protected HashMap<String, ComposantPane> _compList;
 	
 	public ZonePane(String title_) {
-		
+		setZonetitle(title_);
+		initPane();
 	}
 
 	@Override
 	protected void initPane() {
 		
 		super.initPane();
-		setBorder(BorderFactory.createTitledBorder(_zonetitle));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), _zonetitle));
+		
 	}
 	
 	@Override
