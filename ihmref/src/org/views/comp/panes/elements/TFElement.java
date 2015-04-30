@@ -7,15 +7,22 @@
  */
 package org.views.comp.panes.elements;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import org.views.comp.ElementEnum;
 import org.views.comp.panes.parents.ComposantPane;
@@ -59,7 +66,7 @@ public class TFElement extends ComposantPane{
 		// Label
 		_gbc.gridx = _gbc.gridy = 0;									// Ligne 0, Colonne 0.
 		_gbc.insets = new Insets(5, 5, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules). 
+		_gbc.anchor = GridBagConstraints.LINE_START;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules). 
 		add(_libelle, _gbc);											// Ajout du composant dans le GridBagLayout.
 		
 		// TextField
@@ -67,7 +74,7 @@ public class TFElement extends ComposantPane{
 		_gbc.gridy = 0;												// Ligne 0.
 		_gbc.gridwidth = GridBagConstraints.RELATIVE;				// Precise que le composant occupe toute la place depuis sa position jusqu'a l'avant derniere cellule.
 		_gbc.insets = new Insets(5, 2, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
+//		_gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
 		add(getTextField(), _gbc);											// Ajout du composant dans le GridBagLayout.
 		
 		// Bouton
@@ -75,8 +82,18 @@ public class TFElement extends ComposantPane{
 		_gbc.gridy = 0;												// Ligne 0.
 		_gbc.gridwidth = GridBagConstraints.REMAINDER;				// Precise que le composant occupe toute la place en derniere position de la ligne.
 		_gbc.insets = new Insets(5, 2, 5, 5);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
-		add(_button, _gbc);											// Ajout du composant dans le GridBagLayout.
+		_gbc.anchor = GridBagConstraints.LINE_END;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
+		add(getButton(), _gbc);											// Ajout du composant dans le GridBagLayout.
+		
+		Font font = new Font("Tahoma", Font.BOLD, 12);
+		
+		JLabel titl = new JLabel("Themes");
+//		Border CLine = BorderFactory.createMatteBorder(1, 0, 0, 0, Color.decode("#210B61"));
+		Border CLine = BorderFactory.createEmptyBorder();
+		
+		TitledBorder title = BorderFactory.createTitledBorder(CLine, "Themes", TitledBorder.LEFT, TitledBorder.TOP, font, Color.decode("#210B61"));
+		
+		setBorder(title);
 		
 	}
 	
@@ -84,6 +101,7 @@ public class TFElement extends ComposantPane{
 	protected void initComposants() {
 		
 		_textField = new JTextField(TF_COL);
+		_location = new Point();
 		
 		
 	}
@@ -200,6 +218,8 @@ public class TFElement extends ComposantPane{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
+				System.out.println(_location);
+				
 				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
 				
 			}

@@ -32,11 +32,11 @@ public class ElementFactory {
 		return FACTORY_INSTANCE;
 	}
 	
-	public JButton getButton(ElementEnum type_, String[] values_){
+	public RButton getButton(ElementEnum type_, String[] values_){
 		
-		ImageIcon icone = new ImageIcon(getClass().getResource("/org/views/images/flags/" + values_[3]));
+		ImageIcon icone = new ImageIcon(getClass().getResource("/org/views/images/" + values_[3]));
 		
-		JButton button = new JButton();
+		RButton button = new RButton();
 		button.setName(values_[0]);
 		button.setToolTipText(values_[2]);
 		
@@ -48,10 +48,10 @@ public class ElementFactory {
 			button.setText(values_[1]);
 			button.setIcon(icone);
 		}
-		return new JButton();
+		return button;
 	}
 	
-	public ComposantPane getElement(ElementEnum type_, String libelle_){
+	public ComposantPane getElement(ElementEnum type_, String libelle_, RButton button_){
 		
 		ComposantPane comp = null;
 		
@@ -68,7 +68,7 @@ public class ElementFactory {
 			comp = new RBElement(libelle_);
 			
 		}else if (type_.equals(ElementEnum.TF_ELEMENT)) {
-			comp = new TFElement(libelle_);
+			comp = new TFElement(libelle_, button_);
 			
 		}
 		

@@ -30,8 +30,11 @@ import javax.swing.JTextField;
 import org.IHMAccess;
 import org.views.Ressources;
 import org.views.ViewPrefs;
+import org.views.comp.ElementEnum;
 import org.views.comp.panes.LanguePane;
 import org.views.comp.panes.ThemesPane;
+import org.views.comp.panes.elements.ElementFactory;
+import org.views.comp.panes.elements.RButton;
 
 import com.jtattoo.plaf.About;
 
@@ -74,7 +77,7 @@ public class PrefsFrame extends AppFrame {
 		
 		add(_centerPane);
 		
-		setSize(400, 230);
+		setSize(500, 230);
 		setLocationRelativeTo(null);
 	}
 	
@@ -84,7 +87,7 @@ public class PrefsFrame extends AppFrame {
 		
 
 		
-		_applyBT = new JButton(Ressources.getInstance().getLibelleValue("prefs.submit.button.text"));
+		_applyBT = new RButton(Ressources.getInstance().getLibelleValue("prefs.submit.button.text"));
 		_applyBT.addActionListener(new ActionListener() {
 			
 			@Override
@@ -103,7 +106,10 @@ public class PrefsFrame extends AppFrame {
 	protected void initPanels() {
 		
 		// zone Skin
-		_themesPane = new ThemesPane(this, ViewPrefs.getInstance().getLAF());
+//		_themesPane = new ThemesPane(this, ViewPrefs.getInstance().getLAF());
+		_themesPane = ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "Look & Feel", 
+				ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
+						Ressources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")));
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		_centerPane.setLayout(new GridBagLayout());
@@ -129,10 +135,12 @@ public class PrefsFrame extends AppFrame {
 		_centerPane.add(_languesPane, gbc);								// Ajout du composant dans le GridBagLayout.
 		
 		// Bouton Apply
+		JPanel pane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		pane.add(_applyBT);
 		gbc.gridx = 0;													// Colonne 0.
 		gbc.gridy = 2;													// Ligne 2.
 		gbc.anchor = GridBagConstraints.LINE_END;
-		_centerPane.add(_applyBT, gbc);
+		_centerPane.add(pane, gbc);
 	}
 
 	/**

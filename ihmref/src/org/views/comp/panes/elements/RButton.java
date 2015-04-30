@@ -23,6 +23,13 @@ public class RButton extends JButton {
 	/** RButton
 	 * Constructeur
 	 */
+	public RButton() {
+		super();
+	}
+	
+	/** RButton
+	 * Constructeur
+	 */
 	public RButton(Action a_) {
 		super(a_);
 	}

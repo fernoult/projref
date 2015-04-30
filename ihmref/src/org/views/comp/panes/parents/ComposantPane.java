@@ -8,6 +8,7 @@
 package org.views.comp.panes.parents;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -29,7 +30,9 @@ public class ComposantPane extends RPane{
 	public ComposantPane(String libelle_){
 		
 		_libelle = new JLabel(libelle_);
-		_libelle.setMinimumSize(new Dimension(LIB_WIDTH, _libelle.getSize().height));
+		_libelle.setFont(new Font("Tahoma", Font.BOLD, 12));
+		_libelle.setSize(new Dimension(LIB_WIDTH, _libelle.getSize().height));
+//		initPane();
 	}
 	
 	@Override
