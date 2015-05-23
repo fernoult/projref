@@ -43,7 +43,7 @@ public class LanguePane extends JPanel {
 	private String _langue = "";
 	private JLabel _choix;
 	private String _locale = "";
-	private BTElement _btElement = (BTElement) ElementFactory.getInstance().getElement(ElementEnum.BT_ELEMENT, "Langues", null);
+	private BTElement _btElement;
 	
 	
 	/** LanguePane
@@ -61,7 +61,7 @@ public class LanguePane extends JPanel {
 	public LanguePane(PrefsFrame parentFrame_, String locale_){
 		super();
 		setParentFrame(parentFrame_);
-		System.out.println("locale LangPane : " + locale_);
+		_btElement = (BTElement) ElementFactory.getInstance().getElement(ElementEnum.BT_ELEMENT, "Langues", null, getParentFrame());
 		initPane(locale_);
 	}
 	

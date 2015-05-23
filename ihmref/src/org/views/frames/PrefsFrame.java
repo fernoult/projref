@@ -35,6 +35,7 @@ import org.views.comp.panes.LanguePane;
 import org.views.comp.panes.ThemesPane;
 import org.views.comp.panes.elements.ElementFactory;
 import org.views.comp.panes.elements.RButton;
+import org.views.comp.panes.elements.TFElement;
 
 import com.jtattoo.plaf.About;
 
@@ -109,7 +110,7 @@ public class PrefsFrame extends AppFrame {
 //		_themesPane = new ThemesPane(this, ViewPrefs.getInstance().getLAF());
 		_themesPane = ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "Look & Feel", 
 				ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
-						Ressources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")));
+						Ressources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")), this);
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		_centerPane.setLayout(new GridBagLayout());
@@ -156,7 +157,7 @@ public class PrefsFrame extends AppFrame {
 		System.out.println("update preferences");
 		
 		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
-		ViewPrefs.getInstance().updateLAF(((ThemesPane) _themesPane).getThemeTF().getText());
+		ViewPrefs.getInstance().updateLAF(((TFElement) _themesPane).getTextField().getText());
 		
 		if (_explorater != null) {
 			System.out.println("GNEEEEEEEEEEEEEEE");

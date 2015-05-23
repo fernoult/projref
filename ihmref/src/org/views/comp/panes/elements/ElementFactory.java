@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import org.views.Ressources;
 import org.views.comp.ElementEnum;
 import org.views.comp.panes.parents.ComposantPane;
+import org.views.frames.AppFrame;
 
 public class ElementFactory {
 
@@ -51,7 +52,7 @@ public class ElementFactory {
 		return button;
 	}
 	
-	public ComposantPane getElement(ElementEnum type_, String libelle_, RButton button_){
+	public ComposantPane getElement(ElementEnum type_, String libelle_, RButton button_, AppFrame parent_){
 		
 		ComposantPane comp = null;
 		
@@ -68,11 +69,12 @@ public class ElementFactory {
 			comp = new RBElement(libelle_);
 			
 		}else if (type_.equals(ElementEnum.TF_ELEMENT)) {
-			comp = new TFElement(libelle_, button_);
+			comp = new TFElement(libelle_, button_, parent_);
 			
 		}
 		
 		return comp;
+		
 	}
 	
 	

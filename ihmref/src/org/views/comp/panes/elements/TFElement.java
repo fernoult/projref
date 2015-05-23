@@ -26,6 +26,7 @@ import javax.swing.border.TitledBorder;
 
 import org.views.comp.ElementEnum;
 import org.views.comp.panes.parents.ComposantPane;
+import org.views.frames.AppFrame;
 import org.views.frames.LafFrame;
 
 public class TFElement extends ComposantPane{
@@ -49,9 +50,11 @@ public class TFElement extends ComposantPane{
 	/** TFElement
 	 * Constructeur
 	 */
-	public TFElement(String libelle_, RButton button_) {
+	public TFElement(String libelle_, RButton button_, AppFrame parent_) {
 		super(libelle_);
 		setButton(button_);
+		_parentFrame = new AppFrame();
+		_parentFrame = parent_;
 		initPane();
 	}
 	
@@ -218,8 +221,6 @@ public class TFElement extends ComposantPane{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
-				System.out.println(_location);
-				
 				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
 				
 			}
