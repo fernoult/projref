@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_17"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_25]"/>
+	<classpathentry kind="lib" path="lib/xml/jdom/lib/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="lib/xml/jdom/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xml/jdom/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/xml/jdom/jdom-2.0.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/xml/jdom/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/date/jodatime/joda-time-2.1/joda-time-2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/date/jodatime/joda-time-2.1/joda-time-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/io/commons-io-2.4/commons-io-2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/io/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/laf/JTattoo-1.6.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
