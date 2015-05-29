@@ -107,10 +107,12 @@ public class PrefsFrame extends AppFrame {
 	protected void initPanels() {
 		
 		// zone Skin
-//		_themesPane = new ThemesPane(this, ViewPrefs.getInstance().getLAF());
 		_themesPane = ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "Look & Feel", 
 				ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
 						Ressources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")), this);
+		((TFElement) _themesPane).getTextField().setText(ViewPrefs.getInstance().getLAF());
+		
+		// Zone Langues
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		_centerPane.setLayout(new GridBagLayout());

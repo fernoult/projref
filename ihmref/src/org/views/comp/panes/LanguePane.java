@@ -120,10 +120,10 @@ public class LanguePane extends JPanel {
 	 */
 	private void initcomposants(String locale_){
 		
-		_choix = new JLabel(_prefixe + ViewPrefs.getInstance().getLocale().getCountry());																		// Instancie le Label du choix de la langue.
+		_choix = new JLabel();																		// Instancie le Label du choix de la langue.
 		_choix.setFont(new Font("Tahoma", Font.BOLD, 12));
 		String prefix = "/org/views/images/flags/";
-		
+		String lang = null;
 		String[] btTab = Ressources.getInstance().getLibelleValue("panes.prefs.lang.zone.buttons.values").split("#");
 		
 		for (int i = 0; i < btTab.length; i++) {
@@ -144,12 +144,13 @@ public class LanguePane extends JPanel {
 					revalidate();																				// On rafraichit l'affichage du panneau.
 				}
 			});
-			
+			String btnn = btn.getName();
+			String btnttt = btn.getToolTipText();
+			if (btn.getName().equals(ViewPrefs.getInstance().getLocale().getCountry())) {
+				_choix.setText(_prefixe + btn.getToolTipText());
+			}
 			_btElement.addButton(btn);
 		}
-		
-		System.out.println(_btElement.get_buttonList().size());
-
 		
 		set_locale(locale_);
 		
