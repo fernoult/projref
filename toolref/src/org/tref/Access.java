@@ -16,6 +16,7 @@ import org.tref.common.utils.Config;
 import org.tref.common.utils.ConfigUtils;
 import org.tref.common.utils.FichierUtils;
 import org.tref.install.Install;
+import org.tref.views.ViewPrefs;
 import org.tref.views.frames.ExploraterFrame;
 
 public class Access {
@@ -47,6 +48,7 @@ public class Access {
 		System.out.println("===================================================================================================");
 		
 		// On lance la fenetre de demarrage.
+		ViewPrefs.getInstance().initPrefs();
 		new ExploraterFrame("EXPLO");
 		
 		
