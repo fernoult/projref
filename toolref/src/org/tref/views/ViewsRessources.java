@@ -24,7 +24,8 @@ public class ViewsRessources {
 	private static String LIBELLES_PATH = ViewsRessources.class.getPackage().getName() + ".Libelles";
 	private static String FRAMES_PROPS_PATH = PFrame.class.getPackage().getName() + ".PFrame";
 	private ViewPrefs PREFS = ViewPrefs.getInstance();
-	private String IMGS_RACINE = ViewsRessources.class.getPackage().getName() + Ressources.getInstance().getSepProj() + "images";
+	private String IMGS_RACINE = ViewsRessources.class.getPackage().getName().replace(".", Ressources.getInstance().getSepProj()) 
+			+ Ressources.getInstance().getSepProj() + "images";
 	
 	
 	private ViewsRessources(){
@@ -41,6 +42,7 @@ public class ViewsRessources {
 	}
 	
 	public String getLibelleValue(String key_){
+		System.out.println(ViewPrefs.getInstance().getLocale());
 		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
 	}
 	
