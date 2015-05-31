@@ -21,7 +21,7 @@ public class Install {
 	private static Install INSTALL_INSTANCE;
 	
 	/** Constante du nom du repertoire prncipal de l'installation. */
-	private static final String APPLI_NAME = "EveSports";
+	private static final String APPLI_NAME = "ProjRef";
 	
 	/** Chemin du fichier de properties de l'installer. */
 	private static final String INSTALL_PROPS = Install.class.getPackage().getName() + ".Install";

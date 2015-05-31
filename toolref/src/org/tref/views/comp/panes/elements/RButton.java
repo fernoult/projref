@@ -57,7 +57,11 @@ public class RButton extends JButton {
 		setMinimumSize(new Dimension(BTN_WIDTH_TXT, BTN_HEIGHT));
 	}
 	
-	
+	@Override
+	public String toString() {
+		
+		return getName() + " * " + getToolTipText() + " * " + getIcon();
+	}
 	
 	
 	

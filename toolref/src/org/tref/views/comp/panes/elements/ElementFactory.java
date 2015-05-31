@@ -37,29 +37,29 @@ public class ElementFactory {
 	
 	public RButton getButton(ElementEnum type_, String[] values_){
 		
-		ImageIcon icone = null;
-//		String imagePath = "/org/tref/views/images/prefs.png";
-		String imagePath = Ressources.getInstance().getSepProj() 
-				+ ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3];
-		try {
-			icone = new ImageIcon(getClass().getResource(imagePath));
-			
-		} catch (NullPointerException e) {
-			System.out.println("fuck");
-		}
-		
 		RButton button = new RButton();
-		button.setName(values_[0]);
-		button.setToolTipText(values_[2]);
-		
-		if (type_.equals(ElementEnum.ICON_BUTTON)) {
-			button.setIcon(icone);
-		}else if (type_.equals(ElementEnum.TEXT_BUTTON)) {
-			button.setText(values_[1]);
-		}else if (type_.equals(ElementEnum.MIXTE_BUTTON)) {
-			button.setText(values_[1]);
-			button.setIcon(icone);
+//		String imagePath = "/org/tref/views/images/prefs.png";
+		String imagePath = Ressources.getInstance().getSepProj() + ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3];
+		try {
+			ImageIcon icone = new ImageIcon(getClass().getResource(imagePath));
+			
+			button.setName(values_[0]);
+			button.setToolTipText(values_[2]);
+			
+			if (type_.equals(ElementEnum.ICON_BUTTON)) {
+				button.setIcon(icone);
+			}else if (type_.equals(ElementEnum.TEXT_BUTTON)) {
+				button.setText(values_[1]);
+			}else if (type_.equals(ElementEnum.MIXTE_BUTTON)) {
+				button.setText(values_[1]);
+				button.setIcon(icone);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("merde");
 		}
+		
 		return button;
 	}
 	

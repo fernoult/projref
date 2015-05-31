@@ -37,6 +37,8 @@ public class ExploraterFrame extends AppFrame {
 	
 	private int _height = get_ressources().getSreenSize().height / 2;
 	
+	private ExploraterFrame _explo;
+	
 	/** ExploraterFrame
 	 * Constructeur
 	 */
@@ -72,7 +74,7 @@ public class ExploraterFrame extends AppFrame {
 //
 //        	}
 //		});
-		
+		_explo = this;
 		// init des composants.
 		initComposants();
 		initPanels();
@@ -103,7 +105,8 @@ public class ExploraterFrame extends AppFrame {
 	protected void initComposants() {
 		
 		// ============= BOUTONS =================
-		_exit = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, _ressources.getPFrameButtonValues("explorateur.btn.exit.values"));
+		_exit = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
+				_ressources.getLibelleButtonValues("explorateur.btn.exit.values"));
 		_exit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -115,7 +118,7 @@ public class ExploraterFrame extends AppFrame {
 		});
 		
 		_newObj = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
-				_ressources.getPFrameButtonValues("explorateur.btn.attr.values"));
+				_ressources.getLibelleButtonValues("explorateur.btn.attr.values"));
 		_newObj.addActionListener(new ActionListener() {
 			
 			@Override
@@ -127,7 +130,7 @@ public class ExploraterFrame extends AppFrame {
 		});
 		
 		_newList = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
-				_ressources.getPFrameButtonValues("explorateur.btn.tab.values"));
+				_ressources.getLibelleButtonValues("explorateur.btn.tab.values"));
 		_newList.addActionListener(new ActionListener() {
 			
 			@Override
@@ -139,13 +142,13 @@ public class ExploraterFrame extends AppFrame {
 		});
 		
 		_prefs = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
-				_ressources.getPFrameButtonValues("explorateur.btn.prefs.values"));
-		final ExploraterFrame explo = this;
+				_ressources.getLibelleButtonValues("explorateur.btn.prefs.values"));
+//		final ExploraterFrame explo = this;
 		_prefs.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				PrefsFrame laff = new PrefsFrame("PREFS", explo);
+				PrefsFrame laff = new PrefsFrame("PREFS", _explo);
 				addFrame(laff);
 			}
 		});

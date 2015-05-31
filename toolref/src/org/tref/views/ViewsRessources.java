@@ -53,8 +53,8 @@ public class ViewsRessources {
 		return ResourceBundle.getBundle(FRAMES_PROPS_PATH).getString(key_);
 	}
 	
-	public String[] getPFrameButtonValues(String key_){
-		return ResourceBundle.getBundle(FRAMES_PROPS_PATH).getString(key_).split("@");
+	public String[] getLibelleButtonValues(String key_){
+		return ResourceBundle.getBundle(LIBELLES_PATH).getString(key_).split("@");
 	}
 	
 	public Dimension getSreenSize(){
