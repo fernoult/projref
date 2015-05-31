@@ -88,7 +88,7 @@ public class ExploraterFrame extends AppFrame {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(_ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
 			
 		} catch (NullPointerException e) {
-			System.out.println("fuck");
+			System.out.println("fuck...");
 		}
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(ExploraterFrame.EXIT_ON_CLOSE);
