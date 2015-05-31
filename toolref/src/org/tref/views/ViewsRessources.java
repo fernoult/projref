@@ -41,7 +41,6 @@ public class ViewsRessources {
 	}
 	
 	public String getLibelleValue(String key_){
-		
 		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
 	}
 	
@@ -54,7 +53,7 @@ public class ViewsRessources {
 	}
 	
 	public String[] getLibelleButtonValues(String key_){
-		return ResourceBundle.getBundle(LIBELLES_PATH).getString(key_).split("@");
+		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_).split("@");
 	}
 	
 	public Dimension getSreenSize(){
