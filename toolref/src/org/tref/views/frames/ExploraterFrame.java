@@ -145,7 +145,6 @@ public class ExploraterFrame extends AppFrame {
 		
 		_prefs = ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
 				_ressources.getLibelleButtonValues("explorateur.btn.prefs.values"));
-//		final ExploraterFrame explo = this;
 		_prefs.addActionListener(new ActionListener() {
 			
 			@Override

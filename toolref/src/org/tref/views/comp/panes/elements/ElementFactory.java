@@ -38,10 +38,10 @@ public class ElementFactory {
 	public RButton getButton(ElementEnum type_, String[] values_){
 		
 		RButton button = new RButton();
-//		String imagePath = "/org/tref/views/images/prefs.png";
-		String imagePath = Ressources.getInstance().getSepProj() + ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3];
+
 		try {
-			ImageIcon icone = new ImageIcon(getClass().getResource(imagePath));
+			ImageIcon icone = new ImageIcon(getClass().getResource(Ressources.getInstance().getSepProj() 
+					+ ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3]));
 			
 			button.setName(values_[0]);
 			button.setToolTipText(values_[2]);
@@ -56,8 +56,7 @@ public class ElementFactory {
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-			System.out.println("merde");
+			System.out.println(e.getClass().getName());
 		}
 		
 		return button;
