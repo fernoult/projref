@@ -89,6 +89,7 @@ public class ExploraterFrame extends AppFrame {
 					Ressources.getInstance().getSepProj() + _ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
 			
 		} catch (NullPointerException e) {
+			//TODO pas bien, il faut que tu propages l'Exception pour indiquer un message et fermer l'appli
 			System.out.println("fuck...");
 		}
 		setLocationRelativeTo(null);

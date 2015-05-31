@@ -53,6 +53,7 @@ public class ViewsRessources {
 	}
 	
 	public String[] getLibelleButtonValues(String key_){
+		// TODO Ca plante ici, tu as un petit problème de Local  (en fait d'init de tes préférences)
 		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_).split("@");
 	}
 	
