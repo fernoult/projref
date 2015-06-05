@@ -42,7 +42,6 @@ public class ViewsRessources {
 	}
 	
 	public String getLibelleValue(String key_){
-		System.out.println(ViewPrefs.getInstance().getLocale());
 		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
 	}
 	
@@ -69,7 +68,6 @@ public class ViewsRessources {
 		
 		for (int i = 0; i < LAF_LIST.length; i++) {
 			LAF_LIST[i] = LAF_LIST[i].trim();
-			System.out.println(LAF_LIST[i]);
 		}
 		return LAF_LIST;
 	}
@@ -97,7 +95,8 @@ public class ViewsRessources {
 	}
 	
 	public String getImgsPath(){
-		return IMGS_RACINE.replace(".", Ressources.getInstance().getSepProj());
+		return Ressources.getInstance().getSepProj() 
+				+ IMGS_RACINE.replace(".", Ressources.getInstance().getSepProj());
 	}
 	
 	public String getImgsFlagsPath(){
