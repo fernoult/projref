@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import org.tref.common.resources.Ressources;
 import org.tref.views.LAF;
 import org.tref.views.ViewsRessources;
 import org.tref.views.comp.tables.LafTable;
@@ -101,7 +102,8 @@ public class LafPane extends JPanel {
 	
 	private void initComposants(){
 		
-		_lafImage = new JLabel(new ImageIcon(getClass().getResource("/org/views/images/lafs/laf_graphite.jpg")));
+		_lafImage = new JLabel(new ImageIcon(getClass().getResource(ViewsRessources.getInstance().getImgsPath() 
+				+ Ressources.getInstance().getSepProj() + "laf_graphite.jpg")));
 		_jtVersion = new JLabel("Librarire JTattoo " + About.JTATTOO_VERSION);
 
 	}
@@ -141,7 +143,7 @@ public class LafPane extends JPanel {
 
 		_lafTable.addMouseMotionListener(new MouseMotionListener() {
 			
-			String prefix = "/org/views/images/lafs/laf_";
+			String prefix = ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + "laf_";
 			String suffix = ".jpg";
 			
 			@Override

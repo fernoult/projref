@@ -40,6 +40,7 @@ public class Access {
 	
 		// Actions d'usage.
 		
+		ViewPrefs.getInstance().initPrefs();
 		checkAlreadyRunning();			// On verifie si une instance de l'application n'est pas deja lancee.
 		fixLookAndFeel();				// On positionne le LookAnd Feel de l'application.
 		checkArguments(args);			// On verifie les arguments passe au lancement de l'application.
@@ -48,7 +49,6 @@ public class Access {
 		System.out.println("===================================================================================================");
 		
 		// On lance la fenetre de demarrage.
-		ViewPrefs.getInstance().initPrefs();
 		new ExploraterFrame("EXPLO");
 		
 		
@@ -101,6 +101,9 @@ public class Access {
 		
 		Preferences prefs = Preferences.userNodeForPackage(Access.class);
 		String flag = Ressources.ALREADY_INSTALLED;
+		
+		// Affichage du log en console.
+		System.out.println(PEnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.AlreadyInstalled.text") + prefs.getBoolean(flag, true)));
 		
 			if (prefs.getBoolean(flag, true)) {
 				prefs.putBoolean(flag, false);
@@ -172,7 +175,7 @@ public class Access {
 		try {
 			
 			// On positione le LAF par defaut.
-			UIManager.setLookAndFeel(Ressources.getDefaultLAF());
+			UIManager.setLookAndFeel(ViewPrefs.getInstance().getLAF());
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

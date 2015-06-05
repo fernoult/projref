@@ -2,6 +2,7 @@ package org.tref.views.frames;
 
 import java.awt.Toolkit;
 
+import org.tref.common.resources.Ressources;
 import org.tref.views.ViewsRessources;
 
 public class ObjFrame extends AppFrame{
@@ -21,7 +22,8 @@ public class ObjFrame extends AppFrame{
 	protected void initPFrame() {
 		super.initPFrame();
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/views/images/objet.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ViewsRessources.getInstance().getImgsPath() 
+				+ Ressources.getInstance().getSepProj() + "objet.png")));
 		setSize(250, 200);
 		setDefaultCloseOperation(ObjFrame.DISPOSE_ON_CLOSE);
 	}

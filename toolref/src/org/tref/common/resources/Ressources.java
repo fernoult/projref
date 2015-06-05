@@ -134,7 +134,6 @@ public class Ressources {
 
 	// LAF
 	public static String getDefaultLAF() {
-		// TODO JavaDoc de suite !!! (Retoure le LookAndFeel par defaut.)
 		return getInstance().getCommonLabel("laf.default.name");
 	}
 	

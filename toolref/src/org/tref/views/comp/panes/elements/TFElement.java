@@ -37,6 +37,8 @@ public class TFElement extends ComposantPane{
 	
 	private RButton _button;
 	
+	private String _zonetitle;
+	
 	/** TFElement
 	 * Constructeur
 	 */
@@ -51,7 +53,6 @@ public class TFElement extends ComposantPane{
 	public TFElement(String libelle_, RButton button_, AppFrame parent_) {
 		super(libelle_);
 		setButton(button_);
-		_parentFrame = new AppFrame();
 		_parentFrame = parent_;
 		initPane();
 	}
@@ -92,10 +93,9 @@ public class TFElement extends ComposantPane{
 //		Border CLine = BorderFactory.createMatteBorder(1, 0, 0, 0, Color.decode("#210B61"));
 		Border CLine = BorderFactory.createEmptyBorder();
 		
-		TitledBorder title = BorderFactory.createTitledBorder(CLine, "Themes", TitledBorder.LEFT, TitledBorder.TOP, font, Color.decode("#210B61"));
+		TitledBorder title = BorderFactory.createTitledBorder(CLine, _zonetitle, TitledBorder.LEFT, TitledBorder.TOP, font, Color.decode("#210B61"));
 		
 		setBorder(title);
-		
 	}
 	
 	@Override
@@ -173,10 +173,29 @@ public class TFElement extends ComposantPane{
 		
 		if (button_ == null) {					// Si le RButton est null, alors on en instancie un autre et on mentionne qu'il est par defaut
 			_button = new RButton("A_DEF");
-			putRButtonAction(_button);
+//			putRButtonAction(_button);
 		}else {
 			_button = button_;			
-			putRButtonAction(_button);
+//			putRButtonAction(_button);
+		}
+	}
+	
+	@Override
+	public Point getLocation() {
+		if (_location != null) {
+			return _location;			
+		}else {
+			return this.getLocationOnScreen();
+		}
+	}
+	
+	@Override
+	public void setLocation(Point location_) {
+		
+		if (location_ != null) {
+			_location = location_;
+		}else {
+			_location = this.getLocationOnScreen();
 		}
 	}
 	
@@ -218,11 +237,34 @@ public class TFElement extends ComposantPane{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
-				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
-				
+//				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
+//				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
+//				
 			}
 		});
+	}
+	
+	/**
+	 * <b>Methode:  org.tref.views.comp.panes.elements.get_zonetitle()</b><br/>
+	 *
+	 *<b>Description: </b><br/>
+	 *<br/>
+	 * @return String
+	 */
+	public String get_zonetitle() {
+		return _zonetitle;
+	}
+	
+	/**
+	 * <b>Methode:  org.tref.views.comp.panes.elements.set_zonetitle()</b><br/>
+	 *
+	 *<b>Description: </b><br/>
+	 *<br/>
+	 * @param _zonetitle void
+	 */
+	public void set_zonetitle(String zonetitle_) {
+		this._zonetitle = zonetitle_;
+		revalidate();
 	}
 	
 	

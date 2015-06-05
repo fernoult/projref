@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.tref.common.resources.Ressources;
+import org.tref.views.ViewsRessources;
 import org.tref.views.frames.LafFrame;
 import org.tref.views.frames.PFrame;
 
@@ -111,7 +113,8 @@ public class ThemesPane extends JPanel {
 		_themeLB = new JLabel("Look And Feel : ");														// On instancie le label
 		_themeTF = new JTextField(20);																	// On instancie le TextField.
 		_themeTF.setText(_theme);
-		_themeBT = new JButton(new ImageIcon(getClass().getResource("/org/views/images/lnf.png")));		// On instancie le bouton avec son icone.
+		_themeBT = new JButton(new ImageIcon(getClass().getResource(ViewsRessources.getInstance().getImgsPath()
+				+ Ressources.getInstance().getSepProj() + "lnf.png")));		// On instancie le bouton avec son icone.
 		_themeBT.addMouseListener(new MouseListener() {													// On positionne un ActionListner sur l'action du bouton.
 			
 			@Override
@@ -133,7 +136,7 @@ public class ThemesPane extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
-				_parentFrame.get_frames().add(new LafFrame(_location, _themeTF));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
+				_parentFrame.get_frames().add(new LafFrame(_location, _themeTF, ""));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
 				
 			}
 		});

@@ -4,8 +4,11 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
@@ -32,6 +35,7 @@ public class PrefsFrame extends AppFrame {
 	
 	private JPanel _themesPane;
 	private JPanel _languesPane;
+	private TFElement _emailPane;
 	
 	private ExploraterFrame _explorater;
 	
@@ -94,10 +98,41 @@ public class PrefsFrame extends AppFrame {
 		_themesPane = ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "Look & Feel", 
 				ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
 						ViewsRessources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")), this);
+		((TFElement) _themesPane).getButton().addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				((TFElement) _themesPane).setLocation(arg0.getLocationOnScreen());													// On recupere la position du curseur au moment du clic.
+				_explorater.get_frames().add(new LafFrame(((TFElement) _themesPane).getLocation(), ((TFElement) _themesPane).getTextField(), "LAF"));
+			}
+		});
+		
 		((TFElement) _themesPane).getTextField().setText(ViewPrefs.getInstance().getLAF());
+		((TFElement) _themesPane).set_zonetitle("Themes");
 		
 		// Zone Langues
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
+		
+		// Zone e-mail admin
+		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this);
+		_emailPane.set_zonetitle("Email");
 		
 		_centerPane.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -121,11 +156,21 @@ public class PrefsFrame extends AppFrame {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		_centerPane.add(_languesPane, gbc);								// Ajout du composant dans le GridBagLayout.
 		
+		// EmailPanel
+		gbc.gridx = 0;													// Colonne 0.
+		gbc.gridy = 2;													// Ligne 1.
+		gbc.gridwidth = GridBagConstraints.REMAINDER;					// Precise que le composant occupe toute la place en derniere position de la ligne.
+		gbc.insets = new Insets(5, 2, 5, 5);							// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
+		gbc.anchor = GridBagConstraints.CENTER;							// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
+		gbc.weightx = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		_centerPane.add(_emailPane, gbc);								// Ajout du composant dans le GridBagLayout.
+		
 		// Bouton Apply
 		JPanel pane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		pane.add(_applyBT);
 		gbc.gridx = 0;													// Colonne 0.
-		gbc.gridy = 2;													// Ligne 2.
+		gbc.gridy = 3;													// Ligne 2.
 		gbc.anchor = GridBagConstraints.LINE_END;
 		_centerPane.add(pane, gbc);
 	}
@@ -141,12 +186,11 @@ public class PrefsFrame extends AppFrame {
 	private void updatePrefs(){
 		
 		System.out.println("update preferences");
-		
+		String test = ((TFElement) _themesPane).getTextField().getText();
 		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
 		ViewPrefs.getInstance().updateLAF(((TFElement) _themesPane).getTextField().getText());
 		
 		if (_explorater != null) {
-			System.out.println("GNEEEEEEEEEEEEEEE");
 			ArrayList<PFrame> liste = _explorater.get_frames();
 			for (Iterator<PFrame> iterator = liste.iterator(); iterator.hasNext();) {
 				PFrame pFrame = (PFrame) iterator.next();

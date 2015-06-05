@@ -13,6 +13,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 
+import org.tref.common.resources.Ressources;
+import org.tref.views.ViewsRessources;
 import org.tref.views.comp.panes.LafPane;
 
 public class LafFrame extends TabFrame {
@@ -27,10 +29,9 @@ public class LafFrame extends TabFrame {
 		initPFrame();
 	}
 	
-	public LafFrame(Point parentLocation_, JTextField lafTF_){
-		super();
+	public LafFrame(Point parentLocation_, JTextField lafTF_, String title_){
+		super(title_);
 		_parentLocation = parentLocation_;
-		System.out.println(_parentLocation.getX() + " - " + _parentLocation.getY());
 		initPFrame(lafTF_);
 	}
 	
@@ -42,7 +43,8 @@ public class LafFrame extends TabFrame {
 		_centerPane.add(centerPane, BorderLayout.CENTER);
 		add(_centerPane);
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/views/images/lnf.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(ViewsRessources.getInstance().getImgsPath()
+				+ Ressources.getInstance().getSepProj() + "lnf.png")));
 		setSize(310, 470);
 		if (_parentLocation != null) {
 			setLocation(_parentLocation);			

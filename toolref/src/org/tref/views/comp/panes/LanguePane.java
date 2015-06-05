@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import org.tref.common.resources.Ressources;
 import org.tref.views.ViewsRessources;
 import org.tref.views.ViewPrefs;
 import org.tref.views.comp.ElementEnum;
@@ -121,7 +122,7 @@ public class LanguePane extends JPanel {
 		
 		_choix = new JLabel();																		// Instancie le Label du choix de la langue.
 		_choix.setFont(new Font("Tahoma", Font.BOLD, 12));
-		String prefix = "/org/views/images/flags/";
+		String prefix = ViewsRessources.getInstance().getImgsPath();
 		String lang = null;
 		String[] btTab = ViewsRessources.getInstance().getLibelleValue("panes.prefs.lang.zone.buttons.values").split("#");
 		
@@ -130,7 +131,8 @@ public class LanguePane extends JPanel {
 			String s = btTab[i].trim();
 			String[] tab = s.split("@");
 			
-			final RButton btn = new RButton(new ImageIcon(getClass().getResource(prefix + tab[3])));
+			final RButton btn = new RButton(new ImageIcon(getClass().getResource(prefix 
+					+ Ressources.getInstance().getSepProj()+ tab[3])));
 			btn.setName(tab[0]);																				// On lui affecte un nom.
 			btn.setToolTipText(tab[1]);																		// On lui positionne un ToolTypeText.
 			btn.addActionListener(new ActionListener() {														// On positionne un ActionListner sur l'action du bouton

@@ -85,12 +85,10 @@ public class ExploraterFrame extends AppFrame {
 		// Comportement de base de la fenetre.
 		setSize(_width, _height);
 		try {
-			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(
-					Ressources.getInstance().getSepProj() + _ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
+			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(_ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
 			
 		} catch (NullPointerException e) {
 			//TODO pas bien, il faut que tu propages l'Exception pour indiquer un message et fermer l'appli
-			System.out.println("fuck...");
 		}
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(ExploraterFrame.EXIT_ON_CLOSE);

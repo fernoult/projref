@@ -5,6 +5,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.tref.Access;
+import org.tref.common.resources.Ressources;
 
 public class ViewPrefs {
 
@@ -41,7 +42,7 @@ public class ViewPrefs {
 		String country = langue.toUpperCase();
 		
 		_locale = new Locale(langue, country);
-		_laf = prefs.get(THEMES, "com.jtattoo.plaf.fast.FastLookAndFeel");
+		_laf = prefs.get(THEMES, "com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 		
 		System.out.println("LAF DANS LES PREFS : " + _laf);
 		System.out.println("LOCALE DANS LES PREFS : " + langue + " " + country);
@@ -80,6 +81,10 @@ public class ViewPrefs {
 	}
 	
 	public String getLAF(){
+		
+		if (_laf == null) {
+			_laf = prefs.get(THEMES, Ressources.getDefaultLAF());
+		}
 		return _laf;
 	}
 	

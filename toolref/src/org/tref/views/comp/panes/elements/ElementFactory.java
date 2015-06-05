@@ -38,10 +38,11 @@ public class ElementFactory {
 	public RButton getButton(ElementEnum type_, String[] values_){
 		
 		RButton button = new RButton();
-
+		System.out.println(Ressources.getInstance().getSepProj() 
+					+ ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3]);
 		try {
-			ImageIcon icone = new ImageIcon(getClass().getResource(Ressources.getInstance().getSepProj() 
-					+ ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3]));
+			ImageIcon icone = new ImageIcon(getClass().getResource(ViewsRessources.getInstance().getImgsPath() 
+					+ Ressources.getInstance().getSepProj() + values_[3]));
 			
 			button.setName(values_[0]);
 			button.setToolTipText(values_[2]);

@@ -23,7 +23,7 @@ public class AppFrame extends PFrame {
         		
         		JOptionPane.setDefaultLocale(ViewPrefs.getInstance().getLocale());
         		
-        		if (e.getSource().getClass().getName().equals("org.views.frames.ExploraterFrame")) {
+        		if (e.getSource().getClass().getName().equals("org.tref.views.frames.ExploraterFrame")) {
         			
             		if ( confirmCloseApplication() == 0) {
     					setDefaultCloseOperation(EXIT_ON_CLOSE);
