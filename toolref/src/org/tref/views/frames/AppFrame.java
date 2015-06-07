@@ -6,8 +6,10 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import org.tref.common.resources.PEnumLogs;
 import org.tref.views.ViewsRessources;
 import org.tref.views.ViewPrefs;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class AppFrame extends PFrame {
 	
@@ -84,7 +86,8 @@ public class AppFrame extends PFrame {
 				Thread.sleep(20);
 				frame.dispose();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+				new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			}
 		}
 	}

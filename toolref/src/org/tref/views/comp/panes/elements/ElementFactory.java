@@ -11,11 +11,13 @@ import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 
+import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
 import org.tref.views.ViewsRessources;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.parents.ComposantPane;
 import org.tref.views.frames.AppFrame;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ElementFactory {
 
@@ -38,8 +40,6 @@ public class ElementFactory {
 	public RButton getButton(ElementEnum type_, String[] values_){
 		
 		RButton button = new RButton();
-		System.out.println(Ressources.getInstance().getSepProj() 
-					+ ViewsRessources.getInstance().getImgsPath() + Ressources.getInstance().getSepProj() + values_[3]);
 		try {
 			ImageIcon icone = new ImageIcon(getClass().getResource(ViewsRessources.getInstance().getImgsPath() 
 					+ Ressources.getInstance().getSepProj() + values_[3]));
@@ -57,7 +57,9 @@ public class ElementFactory {
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName());
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			button.setText(values_[1]);
+			return button;
 		}
 		
 		return button;
@@ -80,7 +82,7 @@ public class ElementFactory {
 			comp = new RBElement(libelle_);
 			
 		}else if (type_.equals(ElementEnum.TF_ELEMENT)) {
-			comp = new TFElement(libelle_, button_, parent_);
+			comp = new TFElement(libelle_, button_, parent_, "");
 			
 		}
 		

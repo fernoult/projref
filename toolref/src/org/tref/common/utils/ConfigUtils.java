@@ -19,7 +19,9 @@ import org.jdom2.JDOMException;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.tref.Access;
+import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ConfigUtils {
 
@@ -75,11 +77,11 @@ public class ConfigUtils {
 				}
 			}
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		
 		return confObj;
@@ -155,10 +157,12 @@ public class ConfigUtils {
 		try {
 			outputter.output(document, new FileOutputStream(path_));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		}
 

@@ -14,6 +14,7 @@ import org.jdom2.input.SAXBuilder;
 import org.tref.Access;
 import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class FichierUtils {
 
@@ -46,7 +47,7 @@ public class FichierUtils {
 		try {
 			file.createNewFile();
 		} catch (IOException e) {
-			e.printStackTrace();
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		return true;
 	}
@@ -59,7 +60,7 @@ public class FichierUtils {
 			System.out.println(PEnumLogs.INFO.getLogMessage("Creation du fichier " + fullPath_));
 		} catch (IOException e) {
 			System.err.println(PEnumLogs.ERREUR.getLogMessage("echec de la creation de " + fullPath_));
-			e.printStackTrace();
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		}
 		return true;
@@ -123,6 +124,7 @@ public class FichierUtils {
 				
 			} catch (InterruptedException e1) {
 				System.err.println(PEnumLogs.ERREUR.getLogMessage(e1.getClass().getName() + " - " + e1.getMessage()));
+				new ErrorFrame(e1.getClass().toString(), e1.getStackTrace());
 				return false;
 			}
 			
@@ -165,8 +167,10 @@ public class FichierUtils {
 			
 		} catch (IOException e) {
 			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (InterruptedException e) {
 			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 	}
 	

@@ -66,7 +66,7 @@ public class PrefsFrame extends AppFrame {
 		
 		add(_centerPane);
 		
-		setSize(500, 230);
+		setSize(550, 230);
 		setLocationRelativeTo(null);
 	}
 	
@@ -76,7 +76,7 @@ public class PrefsFrame extends AppFrame {
 		
 
 		
-		_applyBT = new RButton(ViewsRessources.getInstance().getLibelleValue("prefs.submit.button.text"));
+		_applyBT = new RButton(ViewsRessources.getInstance().getLibelleValue("prefs.submit.button.ttext"));
 		_applyBT.addActionListener(new ActionListener() {
 			
 			@Override
@@ -125,14 +125,17 @@ public class PrefsFrame extends AppFrame {
 		});
 		
 		((TFElement) _themesPane).getTextField().setText(ViewPrefs.getInstance().getLAF());
-		((TFElement) _themesPane).set_zonetitle("Themes");
+		((TFElement) _themesPane).set_zonetitle(new JLabel("Themes"));
+		
 		
 		// Zone Langues
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		// Zone e-mail admin
 		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this);
-		_emailPane.set_zonetitle("Email");
+		_emailPane.set_zonetitle(new JLabel("Email"));
+		_emailPane.revalidate();
+		_emailPane.repaint();
 		
 		_centerPane.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -173,6 +176,7 @@ public class PrefsFrame extends AppFrame {
 		gbc.gridy = 3;													// Ligne 2.
 		gbc.anchor = GridBagConstraints.LINE_END;
 		_centerPane.add(pane, gbc);
+		
 	}
 
 	/**
@@ -185,7 +189,6 @@ public class PrefsFrame extends AppFrame {
 	 */
 	private void updatePrefs(){
 		
-		System.out.println("update preferences");
 		String test = ((TFElement) _themesPane).getTextField().getText();
 		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
 		ViewPrefs.getInstance().updateLAF(((TFElement) _themesPane).getTextField().getText());

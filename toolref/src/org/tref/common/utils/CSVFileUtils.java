@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.tref.views.frames.erreurs.ErrorFrame;
+
 public class CSVFileUtils {
 
 	private static CSVFileUtils CSVU_INSTANCE;
@@ -53,9 +55,9 @@ public class CSVFileUtils {
 			}
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (IOException e) {
-			e.printStackTrace();
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} finally{
 			try {
 				br.close();

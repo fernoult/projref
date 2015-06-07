@@ -5,7 +5,9 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.tref.Access;
+import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ViewPrefs {
 
@@ -59,7 +61,8 @@ public class ViewPrefs {
 			prefs.flush();
 			
 		} catch (BackingStoreException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		
 		_locale = new Locale(locale_.getLanguage(), locale_.getCountry());
@@ -73,7 +76,8 @@ public class ViewPrefs {
 			prefs.flush();
 			
 		} catch (BackingStoreException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		
 		_laf = laf_;

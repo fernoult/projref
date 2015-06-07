@@ -11,6 +11,7 @@ import org.tref.Access;
 import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
 import org.tref.common.utils.FichierUtils;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class Install {
 
@@ -129,7 +130,8 @@ public class Install {
 				return false;
 			}
 		} catch (BackingStoreException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		return true;
 	}

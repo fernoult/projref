@@ -1,5 +1,6 @@
 package org.tref;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.text.MessageFormat;
@@ -18,6 +19,7 @@ import org.tref.common.utils.FichierUtils;
 import org.tref.install.Install;
 import org.tref.views.ViewPrefs;
 import org.tref.views.frames.ExploraterFrame;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class Access {
 	
@@ -109,9 +111,9 @@ public class Access {
 				prefs.putBoolean(flag, false);
 				try {
 					prefs.flush();
-				} catch (BackingStoreException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (BackingStoreException bse) {
+					System.err.println(PEnumLogs.ERREUR.getLogMessage(bse.getClass().getName() + " - " + bse.getMessage()));
+					new ErrorFrame(bse.getClass().toString(), bse.getStackTrace());
 				}
 				Install.getInstance().install();
 			}
@@ -138,7 +140,19 @@ public class Access {
 				
 				// Parametre dev indique que l'application est lancee en mode developpement et 
 				// que le path du filechooser d'install est directement positionn� sur un repertoire de test.
-				Install.getInstance().setFileChooserPath(_ressources.getCommonLabel("config.install.repDev.text"));
+				File file = new File(System.getProperty("user.home") + Ressources.getInstance().getSepProj() + "DEPLOIE_TEST");
+				
+				if (file.exists()) {
+					Install.getInstance().setFileChooserPath(file.getAbsolutePath());	
+				}else {
+					try {
+						file.createNewFile();
+						Install.getInstance().setFileChooserPath(file.getAbsolutePath());
+					} catch (IOException e) {
+						System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+						new ErrorFrame(e.getClass().toString(), e.getStackTrace());
+					}
+				}
 				break;
 				
 			case "remove":
@@ -178,13 +192,17 @@ public class Access {
 			UIManager.setLookAndFeel(ViewPrefs.getInstance().getLAF());
 			
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 	}
 

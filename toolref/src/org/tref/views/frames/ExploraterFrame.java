@@ -14,10 +14,12 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.elements.ElementFactory;
 import org.tref.views.comp.panes.elements.RButton;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 /**
  * @author fre
@@ -88,7 +90,10 @@ public class ExploraterFrame extends AppFrame {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(_ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
 			
 		} catch (NullPointerException e) {
-			//TODO pas bien, il faut que tu propages l'Exception pour indiquer un message et fermer l'appli
+			e.getStackTrace();
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
+//			System.exit(0);
 		}
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(ExploraterFrame.EXIT_ON_CLOSE);
