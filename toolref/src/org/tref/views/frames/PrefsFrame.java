@@ -76,7 +76,7 @@ public class PrefsFrame extends AppFrame {
 		
 
 		
-		_applyBT = new RButton(ViewsRessources.getInstance().getLibelleValue("prefs.submit.button.ttext"));
+		_applyBT = new RButton(ViewsRessources.getInstance().getLibelleValue("prefs.submit.button.text"));
 		_applyBT.addActionListener(new ActionListener() {
 			
 			@Override
