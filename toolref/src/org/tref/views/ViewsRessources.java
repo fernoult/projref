@@ -10,10 +10,14 @@ package org.tref.views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.install.Install;
 import org.tref.views.frames.PFrame;
+import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ViewsRessources {
 
@@ -26,6 +30,7 @@ public class ViewsRessources {
 	private ViewPrefs PREFS = ViewPrefs.getInstance();
 	private String IMGS_RACINE = ViewsRessources.class.getPackage().getName().replace(".", Ressources.getInstance().getSepProj()) 
 			+ Ressources.getInstance().getSepProj() + "images";
+	private static String ERREUR_PATH = ErrorFrame.class.getPackage().getName() + ".ErrorFrame";
 	
 	
 	private ViewsRessources(){
@@ -42,7 +47,19 @@ public class ViewsRessources {
 	}
 	
 	public String getLibelleValue(String key_){
-		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+		String chaine = null;
+		try {
+			chaine = ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+			
+		} catch (MissingResourceException e) {
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
+		}
+		return chaine;
+	}
+	
+	public String getErrorValue(String key_){
+		return ResourceBundle.getBundle(ERREUR_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
 	}
 	
 	public String getLafValue(String key_){
@@ -50,11 +67,19 @@ public class ViewsRessources {
 	}
 	
 	public String getPFrameLabel(String key_){
-		return ResourceBundle.getBundle(FRAMES_PROPS_PATH).getString(key_);
+		String chaine = null;
+		try {
+			chaine = ResourceBundle.getBundle(FRAMES_PROPS_PATH).getString(key_);
+			
+		} catch (MissingResourceException e) {
+			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
+		}
+		return chaine;
 	}
 	
 	public String[] getLibelleButtonValues(String key_){
-		// TODO Ca plante ici, tu as un petit problème de Local  (en fait d'init de tes préférences)
+		// TODO Ca plante ici, tu as un petit problï¿½me de Local  (en fait d'init de tes prï¿½fï¿½rences)
 		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_).split("@");
 	}
 	
