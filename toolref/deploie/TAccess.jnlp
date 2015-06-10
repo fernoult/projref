@@ -16,7 +16,7 @@
 	</security>
 	<resources>
 		<j2se version="1.7+" href="http://java.sun.com/products/autodl/j2se"/>
-		<jar href="http://10.10.20.95:8080/JWSTest/toolref.jar"/>
+		<jar href="http://10.10.20.95:8080/JWSTest/toolRRef.jar"/>
 	</resources>
 
 	<application-desc main-class="org.tref.Access" />
