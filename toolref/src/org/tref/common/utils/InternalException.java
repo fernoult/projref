@@ -32,7 +32,7 @@ public class InternalException extends Exception {
      *</p>
      *<b>Note: </b>Neant
      */
-    public InternalException() {
+    public InternalException(String message_) {
 	_message = _vresource.getErrorValue("ErreurFrame.Message.Text.Value");
 	
     }

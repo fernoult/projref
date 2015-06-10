@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.utils.InternalException;
 import org.tref.install.Install;
 import org.tref.views.frames.PFrame;
 import org.tref.views.frames.erreurs.ErrorFrame;
@@ -123,12 +124,5 @@ public class ViewsRessources {
 		return Ressources.getInstance().getSepProj() 
 				+ IMGS_RACINE.replace(".", Ressources.getInstance().getSepProj());
 	}
-	
-	public String getImgsFlagsPath(){
-		return getImgsPath() + COMMON_RESOURCE.getSepProj() + "flags";
-	}
-	
-	public String getImgsLafsPath(){
-		return getImgsPath() + COMMON_RESOURCE.getSepProj() + "lafs";
-	}
+
 }
