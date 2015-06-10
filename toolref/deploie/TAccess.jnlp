@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://10.10.20.95:8080/JWSTest/" href="TAccess.jnlp">
+
+	<information>
+		<title>Mon Logiciel par JNLP</title>
+		<vendor>Francois ERNOULT</vendor>
+		
+		<icon href="jwstest.ico" width="64" height="64"/>
+		<shortcut online="true">
+			<desktop/>
+			<menu submenu="JWSTest"/>
+		</shortcut>
+	</information>
+	<security>
+		<all-permissions>
+	</security>
+	<resources>
+		<j2se version="1.7+" href="http://java.sun.com/products/autodl/j2se"/>
+		<jar href="http://10.10.20.95:8080/JWSTest/toolref.jar"/>
+	</resources>
+
+	<application-desc main-class="org.tref.Access" />
+
+</jnlp>
