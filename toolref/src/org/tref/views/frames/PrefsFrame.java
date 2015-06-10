@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.tref.common.resources.Ressources;
 import org.tref.views.ViewsRessources;
 import org.tref.views.ViewPrefs;
 import org.tref.views.comp.ElementEnum;
@@ -66,7 +67,7 @@ public class PrefsFrame extends AppFrame {
 		
 		add(_centerPane);
 		
-		setSize(550, 230);
+		setSize(550, 300);
 		setLocationRelativeTo(null);
 	}
 	
@@ -97,7 +98,7 @@ public class PrefsFrame extends AppFrame {
 		// zone Skin
 		_themesPane = ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "Look & Feel", 
 				ElementFactory.getInstance().getButton(ElementEnum.ICON_BUTTON, 
-						ViewsRessources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")), this);
+						ViewsRessources.getInstance().getLibelleValue("panes.prefs.themes.button.value").split("@")), this, _ressources.getLibelleValue("prefs.pane.theme.cadre.value"));
 		((TFElement) _themesPane).getButton().addMouseListener(new MouseListener() {
 			
 			@Override
@@ -125,15 +126,15 @@ public class PrefsFrame extends AppFrame {
 		});
 		
 		((TFElement) _themesPane).getTextField().setText(ViewPrefs.getInstance().getLAF());
-		((TFElement) _themesPane).set_zonetitle(new JLabel("Themes"));
+		((TFElement) _themesPane).set_zonetitle("Themes");
 		
 		
 		// Zone Langues
 		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
 		
 		// Zone e-mail admin
-		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this);
-		_emailPane.set_zonetitle(new JLabel("Email"));
+		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this, "Email");
+		_emailPane.set_zonetitle("Email");
 		_emailPane.revalidate();
 		_emailPane.repaint();
 		

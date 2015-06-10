@@ -40,7 +40,7 @@ public class TFElement extends ComposantPane{
 	
 	private RButton _button;
 	
-	private JLabel _zonetitle = new JLabel();
+	private String _zonetitle;
 	
 	/** TFElement
 	 * Constructeur
@@ -57,7 +57,7 @@ public class TFElement extends ComposantPane{
 		super(libelle_);
 		setButton(button_);
 		_parentFrame = parent_;
-		_zonetitle.setText(zoneTitle_);
+		_zonetitle = zoneTitle_;
 		initPane();
 	}
 	
@@ -70,35 +70,39 @@ public class TFElement extends ComposantPane{
 		super.initPane();
 		
 		// Label
-		_gbc.gridx = _gbc.gridy = 0;									// Ligne 0, Colonne 0.
-		_gbc.insets = new Insets(5, 5, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.LINE_START;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules). 
-		_gbc.fill = GridBagConstraints.HORIZONTAL;
-		add(_libelle, _gbc);											// Ajout du composant dans le GridBagLayout.
+		GridBagConstraints gbc1 = new GridBagConstraints();
+		gbc1.gridx = _gbc.gridy = 0;									// Ligne 0, Colonne 0.
+		gbc1.insets = new Insets(10, 5, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).	
+		gbc1.anchor = GridBagConstraints.LINE_START;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules). 
+		gbc1.fill = GridBagConstraints.HORIZONTAL;
+		add(_libelle, gbc1);											// Ajout du composant dans le GridBagLayout.
 		
 		// TextField
-		_gbc.gridx = 1;												// Colonne 1.
-		_gbc.gridy = 0;												// Ligne 0.
-		_gbc.gridwidth = GridBagConstraints.RELATIVE;				// Precise que le composant occupe toute la place depuis sa position jusqu'a l'avant derniere cellule.
-		_gbc.insets = new Insets(5, 2, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
-		_gbc.fill = GridBagConstraints.HORIZONTAL;
-		add(getTextField(), _gbc);											// Ajout du composant dans le GridBagLayout.
+		GridBagConstraints gbc2 = new GridBagConstraints();
+		gbc2.gridx = 1;												// Colonne 1.
+		gbc2.gridy = 0;												// Ligne 0.
+		gbc2.gridwidth = GridBagConstraints.RELATIVE;				// Precise que le composant occupe toute la place depuis sa position jusqu'a l'avant derniere cellule.
+		gbc2.weightx = 1;
+		gbc2.insets = new Insets(10, 2, 5, 2);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
+		gbc2.anchor = GridBagConstraints.CENTER;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
+		gbc2.fill = GridBagConstraints.HORIZONTAL;
+		add(getTextField(), gbc2);											// Ajout du composant dans le GridBagLayout.
 		
 		// Bouton
-		_gbc.gridx = 2;												// Colonne 2.
-		_gbc.gridy = 0;												// Ligne 0.
-		_gbc.gridwidth = GridBagConstraints.REMAINDER;				// Precise que le composant occupe toute la place en derniere position de la ligne.
-		_gbc.insets = new Insets(5, 2, 5, 5);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
-		_gbc.anchor = GridBagConstraints.LINE_END;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
-		add(getButton(), _gbc);											// Ajout du composant dans le GridBagLayout.
+		GridBagConstraints gbc3 = new GridBagConstraints();
+		gbc3.gridx = 2;												// Colonne 2.
+		gbc3.gridy = 0;												// Ligne 0.
+		gbc3.gridwidth = GridBagConstraints.REMAINDER;				// Precise que le composant occupe toute la place en derniere position de la ligne.
+		gbc3.insets = new Insets(10, 2, 5, 5);						// Inset permet de preciser une marge autour du composant dans sa cellule. (Insets(int TOP, int LEFT, int BOTTOM, int RIGHT)).
+		gbc3.anchor = GridBagConstraints.LINE_END;						// Permet d'ancrer le composant dans son espace alloué (1 ou plusieurs cellules).
+		add(getButton(), gbc3);											// Ajout du composant dans le GridBagLayout.
 		
 		Font font = new Font("Tahoma", Font.BOLD, 12);
 		
 		JLabel titl = new JLabel("Themes");
 //		Border CLine = BorderFactory.createMatteBorder(1, 0, 0, 0, Color.decode("#210B61"));
 		Border CLine = BorderFactory.createEmptyBorder();
-		TitledBorder title = BorderFactory.createTitledBorder(CLine, _zonetitle.getText(), TitledBorder.LEFT, TitledBorder.TOP, font, Color.decode("#210B61"));
+		TitledBorder title = BorderFactory.createTitledBorder(CLine, _zonetitle, TitledBorder.LEFT, TitledBorder.TOP, font, Color.decode("#210B61"));
 		
 		setBorder(title);
 	}
@@ -257,7 +261,7 @@ public class TFElement extends ComposantPane{
 	 *<br/>
 	 * @return String
 	 */
-	public JLabel get_zonetitle() {
+	public String get_zonetitle() {
 		return _zonetitle;
 	}
 	
@@ -268,9 +272,10 @@ public class TFElement extends ComposantPane{
 	 *<br/>
 	 * @param _zonetitle void
 	 */
-	public void set_zonetitle(JLabel zonetitle_) {
+	public void set_zonetitle(String zonetitle_) {
 		this._zonetitle = zonetitle_;
-		revalidate();
+		this.repaint();
+		this.revalidate();
 	}
 	
 	

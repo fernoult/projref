@@ -61,7 +61,8 @@ public class LanguePane extends JPanel {
 	public LanguePane(PrefsFrame parentFrame_, String locale_){
 		super();
 		setParentFrame(parentFrame_);
-		_btElement = (BTElement) ElementFactory.getInstance().getElement(ElementEnum.BT_ELEMENT, "Langues", null, getParentFrame());
+		_btElement = (BTElement) ElementFactory.getInstance().getElement(ElementEnum.BT_ELEMENT, 
+				"Langues", null, getParentFrame(), ViewsRessources.getInstance().getLibelleValue("prefs.pane.lang.cadre.value"));
 		initPane(locale_);
 	}
 	

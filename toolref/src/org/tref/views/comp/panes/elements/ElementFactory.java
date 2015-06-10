@@ -65,7 +65,7 @@ public class ElementFactory {
 		return button;
 	}
 	
-	public ComposantPane getElement(ElementEnum type_, String libelle_, RButton button_, AppFrame parent_){
+	public ComposantPane getElement(ElementEnum type_, String libelle_, RButton button_, AppFrame parent_, String zoneName_){
 		
 		ComposantPane comp = null;
 		
@@ -82,7 +82,7 @@ public class ElementFactory {
 			comp = new RBElement(libelle_);
 			
 		}else if (type_.equals(ElementEnum.TF_ELEMENT)) {
-			comp = new TFElement(libelle_, button_, parent_, "");
+			comp = new TFElement(libelle_, button_, parent_, zoneName_);
 			
 		}
 		
