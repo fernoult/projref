@@ -134,9 +134,8 @@ public class PrefsFrame extends AppFrame {
 		
 		// Zone e-mail admin
 		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this, "Email");
-		_emailPane.set_zonetitle("Email");
-		_emailPane.revalidate();
-		_emailPane.repaint();
+		_emailPane.getTextField().setText(ViewsRessources.getInstance().getErrorValue("ErreurFrame.RapportErreur.TO.Text.Value"));
+		_emailPane.getTextField().setEnabled(false);
 		
 		_centerPane.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
