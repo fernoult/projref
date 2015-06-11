@@ -1,5 +1,6 @@
 package org.tref;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,6 +21,8 @@ import org.tref.install.Install;
 import org.tref.views.ViewPrefs;
 import org.tref.views.frames.ExploraterFrame;
 import org.tref.views.frames.erreurs.ErrorFrame;
+import org.tref.views.frames.splash.SplashScreen;
+
 
 public class Access {
 	
@@ -51,6 +54,8 @@ public class Access {
 		System.out.println("===================================================================================================");
 		
 		// On lance la fenetre de demarrage.
+	    SplashScreen splash = new SplashScreen(4000);
+	    splash.showSplashAndExit();	
 		new ExploraterFrame("EXPLO");
 		
 		
@@ -190,6 +195,11 @@ public class Access {
 			
 			// On positione le LAF par defaut.
 			UIManager.setLookAndFeel(ViewPrefs.getInstance().getLAF());
+			
+			UIManager.put("ProgressBar.background", Color.WHITE);
+			UIManager.put("ProgressBar.foreground", Color.decode("#0B3861"));
+			UIManager.put("ProgressBar.selectionBackground", Color.BLACK);  
+			UIManager.put("ProgressBar.selectionForeground",Color.decode("#CEE3F6"));
 			
 		} catch (ClassNotFoundException e) {
 			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
