@@ -21,7 +21,7 @@ import org.tref.install.Install;
 import org.tref.views.ViewPrefs;
 import org.tref.views.frames.ExploraterFrame;
 import org.tref.views.frames.erreurs.ErrorFrame;
-import org.tref.views.frames.splash.SplashScreen;
+import org.tref.views.frames.splash.RunSplashScreen;
 
 
 public class Access {
@@ -54,7 +54,7 @@ public class Access {
 		System.out.println("===================================================================================================");
 		
 		// On lance la fenetre de demarrage.
-	    SplashScreen splash = new SplashScreen(4000);
+	    RunSplashScreen splash = new RunSplashScreen(4000);
 	    splash.showSplashAndExit();	
 		new ExploraterFrame("EXPLO");
 		
