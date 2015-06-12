@@ -14,15 +14,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import javax.swing.BorderFactory;
@@ -31,16 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JWindow;
-import javax.swing.UIManager;
 
 import org.tref.Access;
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
-import org.tref.common.utils.Config;
-import org.tref.install.Install;
-import org.tref.views.ViewPrefs;
 import org.tref.views.ViewsRessources;
-import org.tref.views.frames.erreurs.ErrorFrame;
 
 
 public class RunSplashScreen extends JWindow {
