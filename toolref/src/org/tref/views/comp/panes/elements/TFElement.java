@@ -8,7 +8,6 @@
 package org.tref.views.comp.panes.elements;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -26,9 +25,6 @@ import javax.swing.border.TitledBorder;
 
 import org.tref.views.comp.panes.parents.ComposantPane;
 import org.tref.views.frames.AppFrame;
-import org.tref.views.frames.LafFrame;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
 
 public class TFElement extends ComposantPane{
 
