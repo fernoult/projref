@@ -43,7 +43,7 @@ public class Access {
 	 */
 	public static void main(String[] args) {
 	
-		// Actions d'usage. () juste pour le fun
+		// Actions d'usage au demarrage.
 		
 		ViewPrefs.getInstance().initPrefs();
 		checkAlreadyRunning();			// On verifie si une instance de l'application n'est pas deja lancee.
