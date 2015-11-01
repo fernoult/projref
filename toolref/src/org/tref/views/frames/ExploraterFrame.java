@@ -11,11 +11,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JFrame;
 
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.elements.ElementFactory;
 import org.tref.views.comp.panes.elements.RButton;
@@ -27,85 +26,113 @@ import org.tref.views.frames.erreurs.ErrorFrame;
  */
 public class ExploraterFrame extends AppFrame {
 	
+	/** Le bouton de sortie de l'application. */
 	private RButton _exit;
 	
+	/** Bouton de creation d'une fenetre representative d'un objet. */
 	private RButton _newObj;
 	
+	/** Bouton de creation d'une fenetre qui liste des objets. */
 	private RButton _newList;
 	
+	/** Bouton de creation de la fenetre des preferences. */
 	private RButton _prefs;
 	
-	private int _width = get_ressources().getSreenSize().width / 3;
+	/** Largeur de la fenetre explorateur. */
+	private int _width;
 	
-	private int _height = get_ressources().getSreenSize().height / 2;
+	/** Hauteur de la fenetre explorateur. */
+	private int _height;
 	
+	/** Instance de l'explorateur pour passage dans un listner. */
 	private ExploraterFrame _explo;
-	
-	/** ExploraterFrame
-	 * Constructeur
+
+	/**
+	 * 
+	 * Constructeur de la classe ExploraterFrame.java
 	 */
 	public ExploraterFrame() {
 		super();
+		initSize();
 		initPFrame();
 	}
 	
+	/**
+	 * 
+	 * Constructeur de la classe ExploraterFrame.java
+	 * @param title_
+	 */
 	public ExploraterFrame(String title_){
 		super();
 		setTitle(title_);
+		initSize();
 		initPFrame();
 	}
 	
+	/**
+	 * 
+	 * <b>initSize() - org.tref.views.frames.ExploraterFrame.initSize()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Positionne la taille de l'exploratuer.<br/>
+	 * <br/>
+	 */
+	protected void initSize(){
+		
+		// On poisitionne la taille de l'explorateur.
+		_width = get_ressources().getSreenSize().width / 3;
+		_height = get_ressources().getSreenSize().height / 2;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initPFrame()
+	 */
 	@Override
 	protected void initPFrame() {
+		
+		// Appel de l'init de la fenetre parente.
 		super.initPFrame();
 		
-//        // Ajout de l'interdiction sur la croix.
-//        addWindowListener(new WindowAdapter() {
-//        	
-//        	@SuppressWarnings("static-access")
-//			@Override
-//        	public void windowClosing(WindowEvent e) {
-//        		
-//        		// Si le traitement n'est pas encore termin�, on interdit de fermer la fen�tre avec la croix.
-//        		// et on affiche une fen�tre d'avertissement avec message + possibilit� d'annuler proprement la requ�te.
-//        		
-//        		if ( confirmClose() == 0) {
-//					setDefaultCloseOperation(EXIT_ON_CLOSE);
-//					dispose();
-//				}
-//
-//        	}
-//		});
+		// On instancie this.
+		// et init des composants.
 		_explo = this;
-		// init des composants.
 		initComposants();
 		initPanels();
 		
-		
+		// On ajoute le panneau nord.
 		add(get_northPane());
 		
 		// Comportement de base de la fenetre.
+		// Taille, position sur l'ecran, comportement de fermeture.
 		setSize(_width, _height);
 		try {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(_ressources.getImgsPath() + Ressources.getInstance().getSepProj() + _ressources.getPFrameLabel("explorater.icon.name"))));
 			
 		} catch (NullPointerException e) {
 			e.getStackTrace();
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
-//			System.exit(0);
 		}
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(ExploraterFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initPanels()
+	 */
 	@Override
 	protected void initPanels() {
 		
+		// On initialise le panneau nord.
 		_northPane.add(_toolBar);
-		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initComposants()
+	 */
 	@Override
 	protected void initComposants() {
 		
@@ -129,8 +156,9 @@ public class ExploraterFrame extends AppFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				// On ouvre une nouvelle fenetre representative d'un objet.
 				ObjFrame objf = new ObjFrame("OBJ");
-				get_frames().add(objf);
+				addFrame(objf);
 			}
 		});
 		
@@ -141,8 +169,9 @@ public class ExploraterFrame extends AppFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// On ouvre une nouvelle fenetre qui liste des objets.
 				TabFrame tabf = new TabFrame("TAB");
-				get_frames().add(tabf);
+				addFrame(tabf);
 			}
 		});
 		
@@ -166,6 +195,10 @@ public class ExploraterFrame extends AppFrame {
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.AppFrame#dispose()
+	 */
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -174,6 +207,10 @@ public class ExploraterFrame extends AppFrame {
 
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.AppFrame#confirmCloseApplication()
+	 */
 	@Override
 	protected int confirmCloseApplication() {
 		// TODO Auto-generated method stub

@@ -136,7 +136,7 @@ public class ThemesPane extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
-				_parentFrame.get_frames().add(new LafFrame(_location, _themeTF, ""));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
+				_parentFrame.get_frames().add(new LafFrame(_location, _themeTF, ""));						// On instancie la fenetre des LAndFImpl en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
 				
 			}
 		});
@@ -238,6 +238,7 @@ public class ThemesPane extends JPanel {
 	 * 
 	 * @return the location
 	 */
+	@Override
 	public Point getLocation() {
 		return _location;
 	}
@@ -250,6 +251,7 @@ public class ThemesPane extends JPanel {
 	 * 
 	 * @return the location
 	 */
+	@Override
 	public void setLocation(Point location_) {
 		_location = location_;
 	}

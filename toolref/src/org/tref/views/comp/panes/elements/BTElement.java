@@ -76,7 +76,7 @@ public class BTElement extends ComposantPane{
 	private void updateButtonPanel(ArrayList<RButton> buttonList_){
 		
 		for (Iterator<RButton> iterator = buttonList_.iterator(); iterator.hasNext();) {
-			RButton button = (RButton) iterator.next();
+			RButton button = iterator.next();
 			_buttonPane.add(button);
 		}
 		

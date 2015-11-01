@@ -21,53 +21,107 @@ import org.tref.views.ViewsRessources;
 
 public class PFrame extends JFrame{
 
+	/** Nom de la fenetre. */
 	protected String _name;
 	
+	/** Panneau nord */
 	protected JPanel _northPane;
 	
+	/** Panneau central */
 	protected JPanel _centerPane;
 	
+	/** Panneau sud. */
 	protected JPanel _southPane;
 	
-	protected ArrayList<PFrame> _frames = new ArrayList<>();
+	/** Liste des fenetres filles */
+	protected ArrayList<PFrame> _frames;
 	
+	/** La ToolBar */
 	protected JToolBar _toolBar;
 	
-	protected ViewsRessources _ressources = ViewsRessources.getInstance();
+	/** Les ressources des vues. */
+	protected ViewsRessources _ressources; 
 	
 	
 	
-	
+	/**
+	 * 
+	 * Constructeur de la classe PFrame.java
+	 */
 	public PFrame(){
+		
+		// On initialise la liste des fenetres filles,
+		// et l'instance d'access aux ressources.
+		_frames = new ArrayList<>();
+		_ressources = ViewsRessources.getInstance();
+		
+		// On declenche l'init de la fenetre.
 		initPFrame();
+		
 	}
 	
+	/**
+	 * 
+	 * <b>initPFrame() - org.tref.views.frames.PFrame.initPFrame()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Methode d'initialisation de la fenetre.<br/>
+	 * <br/>
+	 */
 	protected void initPFrame(){
 		
 		// le layout
 		setLayout(new BorderLayout());
 		
+		// Init des panneaux.
 		_northPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		_centerPane = new JPanel(new BorderLayout());
 		_southPane = new JPanel();
 		
+		// Init de la toolbar.
 		_toolBar = new JToolBar();
 		_toolBar.setFloatable(false);
 		
-		// Le comportement de base.
-
+		// La fenetre est visible.
 		setVisible(true);
+		
 	}
 	
+	/**
+	 * 
+	 * <b>initPFrame() - org.tref.views.frames.PFrame.initPFrame()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Methode d'initialisation de la fenetre avec le TextField.<br/>
+	 * <br/>
+	 * @param lafTF_
+	 */
 	protected void initPFrame(JTextField lafTF_) {
 		
+		// On appel l'init principal.
 		initPFrame();
 	}
 	
+	/**
+	 * 
+	 * <b>initPanels() - org.tref.views.frames.PFrame.initPanels()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialiation des panneaux.<br/>
+	 * <br/>
+	 */
 	protected void initPanels(){
 		
 	}
 	
+	/**
+	 * 
+	 * <b>initComposants() - org.tref.views.frames.PFrame.initComposants()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialisation des composants.<br/>
+	 * <br/>
+	 */
 	protected void initComposants(){
 		
 	}

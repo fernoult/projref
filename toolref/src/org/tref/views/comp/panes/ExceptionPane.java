@@ -30,11 +30,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
 import org.tref.views.ViewsRessources;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
@@ -116,12 +117,12 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
 	_messagePanel.add(_btnCollapseExtend);
 
 	Font font = new Font("Tahoma", Font.BOLD, 12);
-	Border CLine = BorderFactory.createLineBorder(Color.decode(_vresources.getErrorValue("ErreurFrame.ZoneBorder.Color.Value")));
+	Border CLine = BorderFactory.createLineBorder(Color.decode(_vresources.getErrorValue("ErreurLabel.ZoneBorder.Color.Value")));
 	
 	_causePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
-	TitledBorder causeBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurFrame.Cause.Title.Text.Value") + " ", 
+	TitledBorder causeBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurLabel.Cause.Title.Text.Value") + " ", 
 			TitledBorder.LEFT, TitledBorder.TOP, font, 
-			Color.decode(_vresources.getErrorValue("ErreurFrame.ZoneBorder.Color.Value")));
+			Color.decode(_vresources.getErrorValue("ErreurLabel.ZoneBorder.Color.Value")));
 	_causePane.setBorder(causeBorder);
 	_causePane.add(_cause);
 
@@ -129,16 +130,16 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
 	_stackPane.setFont(new Font("Courier New", Font.PLAIN, 11));
 	_scrollPane = new JScrollPane(_stackPane);
 	JPanel paneDef = new JPanel();
-	TitledBorder stackTraceBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurFrame.StackTrace.Title.Text.Value") + " ", 
+	TitledBorder stackTraceBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurLabel.StackTrace.Title.Text.Value") + " ", 
 			TitledBorder.LEFT, TitledBorder.TOP, font, 
-			Color.decode(_vresources.getErrorValue("ErreurFrame.ZoneBorder.Color.Value")));
+			Color.decode(_vresources.getErrorValue("ErreurLabel.ZoneBorder.Color.Value")));
 	_scrollPane.setBorder(stackTraceBorder);
 	_scrollPane.setVisible(false);
 	
 	_rapportPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-	TitledBorder rapportBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurFrame.RapportErreur.Title.Text.Value") + " ", 
+	TitledBorder rapportBorder = BorderFactory.createTitledBorder(CLine, " " + _vresources.getErrorValue("ErreurLabel.RapportErreur.Title.Text.Value") + " ", 
 			TitledBorder.LEFT, TitledBorder.TOP, font, 
-			Color.decode(_vresources.getErrorValue("ErreurFrame.ZoneBorder.Color.Value")));
+			Color.decode(_vresources.getErrorValue("ErreurLabel.ZoneBorder.Color.Value")));
 	_rapportPane.setBorder(rapportBorder);
 	_rapportPane.add(_rapportLibelle);
 	_rapportPane.add(_btnRapport);
@@ -154,31 +155,31 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
     private void initComposants() {
 	// composants du MessagePane
 	_iconeCollapse = new ImageIcon(getClass().getResource(_vresources.getImgsPath() + Ressources.getInstance().getSepProj() 
-			+ _vresources.getErrorValue("ErreurFrame.Message.BTN.Collapse.Icone.Value")));
+			+ _vresources.getErrorValue("ErreurLabel.Message.BTN.Collapse.Icone.Value")));
 	_iconeExtend = new ImageIcon(getClass().getResource(_vresources.getImgsPath() + Ressources.getInstance().getSepProj() 
-			+ _vresources.getErrorValue("ErreurFrame.Message.BTN.Extend.Icone.Value")));
+			+ _vresources.getErrorValue("ErreurLabel.Message.BTN.Extend.Icone.Value")));
 	_icone = new JLabel();
 	
 	_messageLibelle = new JLabel();
 	_messageLibelle.setFont(new Font("Arial", Font.PLAIN, 14));
 	_messageLibelle.setPreferredSize(new Dimension(350, 50));
-	_messageLibelle.setHorizontalAlignment(JLabel.LEFT);
+	_messageLibelle.setHorizontalAlignment(SwingConstants.LEFT);
 	
 	_cause = new JLabel();
 	_cause.setFont(new Font("Arial", Font.BOLD, 13));
-	_cause.setVerticalAlignment(JLabel.CENTER);
+	_cause.setVerticalAlignment(SwingConstants.CENTER);
 //	_cause.setForeground(Color.decode(_labelsBundle.getString("Exception.frame.cause.color")));
 	_cause.setForeground(Color.RED);
 	
-	_rapportLibelle = new JLabel(_vresources.getErrorValue("ErreurFrame.RapportErreur.Message.Text.Value"));
+	_rapportLibelle = new JLabel(_vresources.getErrorValue("ErreurLabel.RapportErreur.Message.Text.Value"));
 	_rapportLibelle.setFont(new Font("Arial", Font.PLAIN, 12));
 	
-	_btnCollapseExtend = new JButton(_vresources.getErrorValue("ErreurFrame.Message.BTN.Extend.Text.Value"), _iconeExtend);
+	_btnCollapseExtend = new JButton(_vresources.getErrorValue("ErreurLabel.Message.BTN.Extend.Text.Value"), _iconeExtend);
 	_btnCollapseExtend.addActionListener(this);
-	_btnRapport = new JButton(_vresources.getErrorValue("ErreurFrame.RapportErreur.BTN.Text.Value"),
+	_btnRapport = new JButton(_vresources.getErrorValue("ErreurLabel.RapportErreur.BTN.Text.Value"),
 		new ImageIcon(getClass().getResource(_vresources.getImgsPath() + Ressources.getInstance().getSepProj() 
-				+ _vresources.getErrorValue("ErreurFrame.RapportErreur.BTN.Icone.Value"))));
-	_btnRapport.setToolTipText(_vresources.getErrorValue("ErreurFrame.RapportErreur.BTN.ToolType.Value"));
+				+ _vresources.getErrorValue("ErreurLabel.RapportErreur.BTN.Icone.Value"))));
+	_btnRapport.setToolTipText(_vresources.getErrorValue("ErreurLabel.RapportErreur.BTN.ToolType.Value"));
 	_btnRapport.addActionListener(this);
     }
     
@@ -189,19 +190,19 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
     public void actionPerformed(ActionEvent e_) {
 	
 	if (e_.getSource().equals(_btnCollapseExtend)) {
-	    if (e_.getActionCommand().equals(_vresources.getErrorValue("ErreurFrame.Message.BTN.Extend.Text.Value"))) {
+	    if (e_.getActionCommand().equals(_vresources.getErrorValue("ErreurLabel.Message.BTN.Extend.Text.Value"))) {
 		    _stackPane.setVisible(true);
 		    _scrollPane.setVisible(true);
 		    _btnCollapseExtend.setIcon(_iconeCollapse);
 		    _btnCollapseExtend.setSelected(false);
-		    _btnCollapseExtend.setText(_vresources.getErrorValue("ErreurFrame.Message.BTN.Collpase.Text.Value"));
+		    _btnCollapseExtend.setText(_vresources.getErrorValue("ErreurLabel.Message.BTN.Collpase.Text.Value"));
 		    _errorFrame.extendFrame();
-	    }else if (e_.getActionCommand().equals(_vresources.getErrorValue("ErreurFrame.Message.BTN.Collpase.Text.Value"))) {
+	    }else if (e_.getActionCommand().equals(_vresources.getErrorValue("ErreurLabel.Message.BTN.Collpase.Text.Value"))) {
 		    _stackPane.setVisible(false);
 		    _scrollPane.setVisible(false);
 		    _btnCollapseExtend.setIcon(_iconeExtend);
 		    _btnCollapseExtend.setSelected(false);
-		    _btnCollapseExtend.setText(_vresources.getErrorValue("ErreurFrame.Message.BTN.Extend.Text.Value"));
+		    _btnCollapseExtend.setText(_vresources.getErrorValue("ErreurLabel.Message.BTN.Extend.Text.Value"));
 		    _errorFrame.collapseFrame();
 	    }
 
@@ -211,7 +212,7 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
         URI uriMailTo = null;
  
         //Assembler l'url
-        mailTo = _vresources.getErrorValue("ErreurFrame.RapportErreur.TO.Text.Value");
+        mailTo = _vresources.getErrorValue("ErreurLabel.RapportErreur.TO.Text.Value");
         mailTo += "?subject=Rapport Erreur";
         mailTo += "&body=Veuillez trouver ci-joint le rapport d'erreur suivant:\n\n";
         mailTo += _errorFrame.getStackTrace().toString();
@@ -224,9 +225,9 @@ public abstract class ExceptionPane extends JPanel implements ActionListener, Ke
                     uriMailTo = new URI("mailto", mailTo, null);
                     Desktop.getDesktop().mail(uriMailTo);
                 } catch (IOException e) {
-        			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+        			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
                 } catch (URISyntaxException e) {
-        			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+        			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
                 }
 			}
 		}

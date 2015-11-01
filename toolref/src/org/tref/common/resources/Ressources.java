@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.tref.Access;
+import org.tref.common.resources.enums.EnumExtensions;
 
 public class Ressources {
 
@@ -107,7 +108,6 @@ public class Ressources {
 	 * @return String
 	 */
 	public String getDateMillis() {
-		// TODO JavaDoc de suite !!!! (Retourne la date courante en millisecondes formatee)
 		return COMMON_SDF.format(new Date());
 	}
 	
@@ -132,7 +132,7 @@ public class Ressources {
 	public static final int LAUNCH_PORT = 12000;
 
 
-	// LAF
+	// LAndFImpl
 	public static String getDefaultLAF() {
 		return getInstance().getCommonLabel("laf.default.name");
 	}
@@ -147,7 +147,7 @@ public class Ressources {
 	 * @param type_
 	 * @return String
 	 */
-	public String getFilePath(String fileName_, PEnumExtensions type_){
+	public String getFilePath(String fileName_, EnumExtensions type_){
 		
 		String ext = type_.getExtension(), retour = null, prefix = type_.getRepository() + SEP;
 		int begin = 0, end = 0;
@@ -157,7 +157,7 @@ public class Ressources {
 			begin = fileName_.lastIndexOf(".");
 			end = fileName_.length();
 			
-			for (int i = 0; i < PEnumExtensions.values().length; i++) {
+			for (int i = 0; i < EnumExtensions.values().length; i++) {
 				if (!fileName_.substring(begin, end).equals(ext)) {
 					retour = prefix + reformat(fileName_, ext, begin, end);
 				}else {
@@ -180,7 +180,7 @@ public class Ressources {
 	 * @param type_
 	 * @return String
 	 */
-	public String getRepositoryPath(PEnumExtensions type_){
+	public String getRepositoryPath(EnumExtensions type_){
 		return type_.getRepository();
 	}
 	

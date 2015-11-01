@@ -4,10 +4,7 @@
  * FIN HISTORIQUE.
  */
 
-package org.tref.common.utils;
-
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
+package org.tref.common.exceptions;
 
 import org.tref.views.ViewsRessources;
 
@@ -33,7 +30,7 @@ public class InternalException extends Exception {
      *<b>Note: </b>Neant
      */
     public InternalException(String message_) {
-	_message = _vresource.getErrorValue("ErreurFrame.Message.Text.Value");
+	_message = _vresource.getErrorValue("ErreurLabel.Message.Text.Value");
 	
     }
 
@@ -45,7 +42,7 @@ public class InternalException extends Exception {
      * @param message_
      */
     public InternalException(String message_, StackTraceElement[] stackTrace_) {
-	_message = _vresource.getErrorValue("ErreurFrame.Message.Text.Value");
+	_message = _vresource.getErrorValue("ErreurLabel.Message.Text.Value");
 	_stackTrace = stackTrace_;
 	
     }

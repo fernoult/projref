@@ -12,11 +12,12 @@ import java.util.Iterator;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.tref.views.LAF;
+import org.tref.model.ILAndF;
+import org.tref.model.impl.LAndFImpl;
 
 public class LafTableModel extends AbstractTableModel{
 
-	private ArrayList<LAF> _lalList;
+	private ArrayList<LAndFImpl> _lalList;
 	
 	private final String[] _entetes = {"Liste des Look And Feel \"JTattoo\" disponibles"};
 	
@@ -27,7 +28,7 @@ public class LafTableModel extends AbstractTableModel{
 		_lalList = new ArrayList<>();
 	}
 	
-	public LafTableModel(ArrayList<LAF> lafList_){
+	public LafTableModel(ArrayList<LAndFImpl> lafList_){
 		set_lalList(lafList_);
 	}
 
@@ -46,20 +47,20 @@ public class LafTableModel extends AbstractTableModel{
 		return _lalList.get(rowIndex_).getLafName();
 	}
 	
-	public LAF getLAFObject(int rowIndex_){
+	public ILAndF getLAFObject(int rowIndex_){
 		return _lalList.get(rowIndex_);
 	}
 	
-	public void addLAFObject(LAF lafObj_){
+	public void addLAFObject(LAndFImpl lafObj_){
 		_lalList.add(lafObj_);
 		fireTableRowsInserted(_lalList.size(), _lalList.size());
 	}
 
-	public void addLAFObjects(ArrayList<LAF> lafList_){
+	public void addLAFObjects(ArrayList<LAndFImpl> lafList_){
 		
 		for (Iterator iterator = lafList_.iterator(); iterator.hasNext();) {
-			LAF laf = (LAF) iterator.next();
-			_lalList.add(laf);
+			LAndFImpl lAndFImpl = (LAndFImpl) iterator.next();
+			_lalList.add(lAndFImpl);
 			fireTableRowsInserted(_lalList.size(), _lalList.size());
 		}
 	}
@@ -68,14 +69,14 @@ public class LafTableModel extends AbstractTableModel{
 	 * @return the _lalList
 	 */
 	
-	public ArrayList<LAF> get_lalList() {
+	public ArrayList<LAndFImpl> get_lalList() {
 		return _lalList;
 	}
 
 	/**
 	 * @param _lalList the _lalList to set
 	 */
-	public void set_lalList(ArrayList<LAF> _lalList) {
+	public void set_lalList(ArrayList<LAndFImpl> _lalList) {
 		this._lalList = _lalList;
 	}
 

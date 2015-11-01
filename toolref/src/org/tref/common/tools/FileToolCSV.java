@@ -1,4 +1,4 @@
-package org.tref.common.utils;
+package org.tref.common.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,19 +10,19 @@ import java.util.List;
 
 import org.tref.views.frames.erreurs.ErrorFrame;
 
-public class CSVFileUtils {
+public class FileToolCSV {
 
-	private static CSVFileUtils CSVU_INSTANCE;
+	private static FileToolCSV CSVU_INSTANCE;
 	
-	private CSVFileUtils(){
+	private FileToolCSV(){
 		
 	}
 	
-	public static CSVFileUtils getInstance(){
+	public static FileToolCSV getInstance(){
 		
 		// Le Singleton qui va bien.
 		if (CSVU_INSTANCE == null) {
-			CSVU_INSTANCE = new CSVFileUtils();
+			CSVU_INSTANCE = new FileToolCSV();
 		}
 		
 		return CSVU_INSTANCE;

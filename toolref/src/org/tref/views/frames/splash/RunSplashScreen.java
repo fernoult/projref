@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JWindow;
+import javax.swing.SwingConstants;
 
 import org.tref.Access;
 import org.tref.common.resources.Ressources;
@@ -92,7 +93,7 @@ public class RunSplashScreen extends JWindow {
 
 	JPanel copyrtPRbar = new JPanel(new BorderLayout());
 	JLabel copyrt = new JLabel
-		("Copyright 2014, fernoult corporation d'sa m�re", JLabel.CENTER);
+		("Copyright 2014, fernoult corporation d'sa m�re", SwingConstants.CENTER);
 	copyrt.setFont(new Font("Sans-Serif", Font.BOLD, 12));
 	copyrt.setForeground(Color.decode("#1C1C1C")); // #E6E6E6
 	// On initialise la progressBar.

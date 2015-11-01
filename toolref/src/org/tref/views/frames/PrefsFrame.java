@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,9 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.tref.common.resources.Ressources;
+import org.tref.common.preferences.PrefsGUI;
 import org.tref.views.ViewsRessources;
-import org.tref.views.ViewPrefs;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.LanguePane;
 import org.tref.views.comp.panes.elements.ElementFactory;
@@ -29,60 +27,114 @@ import org.tref.views.comp.panes.elements.TFElement;
 
 public class PrefsFrame extends AppFrame {
 
+	/** Le TextField des LAF */
 	private JTextField _lafTF;
+	
+	/** Le Label des LAF */
 	private JLabel _lafLB;
+	
+	/** Le bouton des LAF */
 	private JButton _lafBT;
+	
+	/** Le bouton de j'sais plus quoi. */
 	private JButton _applyBT;
 	
+	/** Le panneau des themes (skins) */
 	private JPanel _themesPane;
+	
+	/** Le panneau des langues. */
 	private JPanel _languesPane;
+	
+	/** Le panneau de l'email. */
 	private TFElement _emailPane;
 	
+	/** Attribut d'une instance de l'explorateur. */
 	private ExploraterFrame _explorater;
 	
+	/**
+	 * 
+	 * Constructeur de la classe PrefsFrame.java
+	 */
 	public PrefsFrame() {
+		// Appel du constructeur parent.
 		super();
 	}
 	
+	/**
+	 * 
+	 * Constructeur de la classe PrefsFrame.java
+	 * @param title_
+	 */
 	public PrefsFrame(String title_){
+		// Appel du constructeur parent.
 		super();
+		
+		// Poisitionne le titre de la fenetre
+		// et init de la fenetre.
 		setTitle(title_);
 		initPFrame();
+		
 	}
 
+	/**
+	 * 
+	 * Constructeur de la classe PrefsFrame.java
+	 * @param title_
+	 * @param explorater_
+	 */
 	public PrefsFrame(String title_, ExploraterFrame explorater_){
+		// Appel du constructeur parent.
 		super();
+		
+		// Positionne le titre de la fenetre,
+		// l'instance de l'explorateur,
+		// et init de la fenetre.
 		setTitle(title_);
 		set_explorater(explorater_);
 		initPFrame();
+		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initPFrame()
+	 */
 	@Override
 	protected void initPFrame() {
 		
+		// Appel de l'init du parent.
 		super.initPFrame();
 		
+		// Init des composants et 
+		// des panneaux.
 		initComposants();
 		initPanels();
 		
+		// On ajoute le panneau central.
 		add(_centerPane);
 		
+		// On positionne la taille et l'emplacement sur l'ecran.
 		setSize(550, 300);
 		setLocationRelativeTo(null);
+		
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initComposants()
+	 */
 	@Override
 	protected void initComposants() {
 		
-
-		
+		// Init du bouton Apply
 		_applyBT = new RButton(ViewsRessources.getInstance().getLibelleValue("prefs.submit.button.text"));
 		_applyBT.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				// On diffuse le changement des prefs 
+				// aux composats concernes, et on ferme la fenetre des prefs.
 				updatePrefs();
 				dispose();
 			}
@@ -92,6 +144,10 @@ public class PrefsFrame extends AppFrame {
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.PFrame#initPanels()
+	 */
 	@Override
 	protected void initPanels() {
 		
@@ -121,20 +177,20 @@ public class PrefsFrame extends AppFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				((TFElement) _themesPane).setLocation(arg0.getLocationOnScreen());													// On recupere la position du curseur au moment du clic.
-				_explorater.get_frames().add(new LafFrame(((TFElement) _themesPane).getLocation(), ((TFElement) _themesPane).getTextField(), "LAF"));
+				_explorater.get_frames().add(new LafFrame(((TFElement) _themesPane).getLocation(), ((TFElement) _themesPane).getTextField(), "LAndFImpl"));
 			}
 		});
 		
-		((TFElement) _themesPane).getTextField().setText(ViewPrefs.getInstance().getLAF());
+		((TFElement) _themesPane).getTextField().setText(PrefsGUI.getInstance().getLAF());
 		((TFElement) _themesPane).set_zonetitle("Themes");
 		
 		
 		// Zone Langues
-		_languesPane = new LanguePane(this, ViewPrefs.getInstance().getLocale().getLanguage());
+		_languesPane = new LanguePane(this, PrefsGUI.getInstance().getLocale().getLanguage());
 		
 		// Zone e-mail admin
 		_emailPane = (TFElement) ElementFactory.getInstance().getElement(ElementEnum.TF_ELEMENT, "email admin", null, this, "Email");
-		_emailPane.getTextField().setText(ViewsRessources.getInstance().getErrorValue("ErreurFrame.RapportErreur.TO.Text.Value"));
+		_emailPane.getTextField().setText(ViewsRessources.getInstance().getErrorValue("ErreurLabel.RapportErreur.TO.Text.Value"));
 		_emailPane.getTextField().setEnabled(false);
 		
 		_centerPane.setLayout(new GridBagLayout());
@@ -181,22 +237,22 @@ public class PrefsFrame extends AppFrame {
 
 	/**
 	 * 
-	 * updatePrefs
-	 * [DESCRIPTION]:
-	 * Cette methode permet d'appliquer es changements des preferences.</br></br>
-	 * [PARAMETRES]:
-	 * void
+	 * <b>updatePrefs() - org.tref.views.frames.PrefsFrame.updatePrefs()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Applique les changements des preferences.<br/>
+	 * <br/>
 	 */
 	private void updatePrefs(){
 		
-		String test = ((TFElement) _themesPane).getTextField().getText();
-		ViewPrefs.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
-		ViewPrefs.getInstance().updateLAF(((TFElement) _themesPane).getTextField().getText());
+		
+		PrefsGUI.getInstance().updateLOC(new Locale(((LanguePane) _languesPane).get_locale(), ((LanguePane) _languesPane).get_locale().toUpperCase()));
+		PrefsGUI.getInstance().updateLAF(((TFElement) _themesPane).getTextField().getText());
 		
 		if (_explorater != null) {
 			ArrayList<PFrame> liste = _explorater.get_frames();
 			for (Iterator<PFrame> iterator = liste.iterator(); iterator.hasNext();) {
-				PFrame pFrame = (PFrame) iterator.next();
+				PFrame pFrame = iterator.next();
 				pFrame.revalidate();
 				pFrame.repaint();
 			}
@@ -204,129 +260,171 @@ public class PrefsFrame extends AppFrame {
 		
 	}
 	
-	/** Methode getLafTF();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+	/**
 	 * 
-	 * @return the lafTF
+	 * <b>getLafTF() - org.tref.views.frames.PrefsFrame.getLafTF()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Retourne le LookAndFeel.<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JTextField getLafTF() {
 		return _lafTF;
 	}
-	/** Methode setLafTF();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JTextField PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the lafTF
+	 * <b>setLafTF() - org.tref.views.frames.PrefsFrame.setLafTF()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialise le LookAndFeel.<br/>
+	 * <br/>
+	 * @param lafTF_
 	 */
 	public void setLafTF(JTextField lafTF_) {
 		_lafTF = lafTF_;
 	}
-	/** Methode getLafLB();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+
+	/**
 	 * 
-	 * @return the lafLB
+	 * <b>getLafLB() - org.tref.views.frames.PrefsFrame.getLafLB()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Retourne le label des LookAndFeel<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JLabel getLafLB() {
 		return _lafLB;
 	}
-	/** Methode setLafLB();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JLabel PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the lafLB
+	 * <b>setLafLB() - org.tref.views.frames.PrefsFrame.setLafLB()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialise le label des LookAndFeel<br/>
+	 * <br/>
+	 * @param lafLB_
 	 */
 	public void setLafLB(JLabel lafLB_) {
 		_lafLB = lafLB_;
 	}
-	/** Methode getLafBT();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+
+	/**
 	 * 
-	 * @return the lafBT
+	 * <b>getLafBT() - org.tref.views.frames.PrefsFrame.getLafBT()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Retourne le bouton des LookAndFeel.<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JButton getLafBT() {
 		return _lafBT;
 	}
-	/** Methode setLafBT();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JButton PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the lafBT
+	 * <b>setLafBT() - org.tref.views.frames.PrefsFrame.setLafBT()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialise le bouton des LookAndFeel<br/>
+	 * <br/>
+	 * @param lafBT_
 	 */
 	public void setLafBT(JButton lafBT_) {
 		_lafBT = lafBT_;
 	}
-	/** Methode getApplyBT();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+
+	/**
 	 * 
-	 * @return the applyBT
+	 * <b>getApplyBT() - org.tref.views.frames.PrefsFrame.getApplyBT()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JButton getApplyBT() {
 		return _applyBT;
 	}
-	/** Methode setApplyBT();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JButton PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the applyBT
+	 * <b>setApplyBT() - org.tref.views.frames.PrefsFrame.setApplyBT()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @param applyBT_
 	 */
 	public void setApplyBT(JButton applyBT_) {
 		_applyBT = applyBT_;
 	}
-	/** Methode getThemesPane();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+
+	/**
 	 * 
-	 * @return the themesPane
+	 * <b>getThemesPane() - org.tref.views.frames.PrefsFrame.getThemesPane()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JPanel getThemesPane() {
 		return _themesPane;
 	}
-	/** Methode setThemesPane();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JPanel PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the themesPane
+	 * <b>setThemesPane() - org.tref.views.frames.PrefsFrame.setThemesPane()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @param themesPane_
 	 */
 	public void setThemesPane(JPanel themesPane_) {
 		_themesPane = themesPane_;
 	}
-	/** Methode getLanguesPane();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
+
+	/**
 	 * 
-	 * @return the languesPane
+	 * <b>getLanguesPane() - org.tref.views.frames.PrefsFrame.getLanguesPane()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @return
 	 */
 	public JPanel getLanguesPane() {
 		return _languesPane;
 	}
-	/** Methode setLanguesPane();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * JPanel PrefsFrame.java
+
+	/**
 	 * 
-	 * @return the languesPane
+	 * <b>setLanguesPane() - org.tref.views.frames.PrefsFrame.setLanguesPane()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @param languesPane_
 	 */
 	public void setLanguesPane(JPanel languesPane_) {
 		_languesPane = languesPane_;
 	}
 	
-	
-	
+	/**
+	 * 
+	 * <b>get_explorater() - org.tref.views.frames.PrefsFrame.get_explorater()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		<br/>
+	 * <br/>
+	 * @return
+	 */
 	public ExploraterFrame get_explorater() {
 		return _explorater;
 	}
@@ -335,6 +433,10 @@ public class PrefsFrame extends AppFrame {
 		this._explorater = _explorater;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.tref.views.frames.AppFrame#dispose()
+	 */
 	@Override
 	public void dispose() {
 		removeFrames();

@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class LafRowsTableRenderer extends DefaultTableCellRenderer {
@@ -16,7 +17,7 @@ public class LafRowsTableRenderer extends DefaultTableCellRenderer {
         // On passe les caracteres en gras et on centre dans la cellule
         Font font = component.getFont();
         component.setFont(new Font(font.getFontName(), Font.BOLD, font.getSize()));
-        ((JLabel) component).setHorizontalAlignment(JLabel.CENTER);
+        ((JLabel) component).setHorizontalAlignment(SwingConstants.CENTER);
         
 //        LafTableModel model = (LafTableModel) table.getModel();
 		

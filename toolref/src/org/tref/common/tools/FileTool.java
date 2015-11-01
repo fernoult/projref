@@ -1,4 +1,4 @@
-package org.tref.common.utils;
+package org.tref.common.tools;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,15 +12,16 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.tref.Access;
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.model.IConfig;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
-public class FichierUtils {
+public class FileTool {
 
 	private static final Ressources _ressources = Ressources.getInstance();
 	
-	private static FichierUtils FM_INSTANCE;
+	private static FileTool FM_INSTANCE;
 	
 	private ArrayList<String> _listeReps = new ArrayList<>();
 	
@@ -30,13 +31,13 @@ public class FichierUtils {
 	
 	private FileOutputStream _copyXmlConfPath;
 	
-	private FichierUtils(){
+	private FileTool(){
 		
 	}
 	
-	public static FichierUtils getInstance(){
+	public static FileTool getInstance(){
 		if (FM_INSTANCE == null) {
-			FM_INSTANCE = new FichierUtils();
+			FM_INSTANCE = new FileTool();
 		}
 		return FM_INSTANCE;
 	}
@@ -57,9 +58,9 @@ public class FichierUtils {
 		File file = new File(fullPath_);
 		try {
 			file.createNewFile();
-			System.out.println(PEnumLogs.INFO.getLogMessage("Creation du fichier " + fullPath_));
+			System.out.println(EnumLogs.INFO.getLogMessage("Creation du fichier " + fullPath_));
 		} catch (IOException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage("echec de la creation de " + fullPath_));
+			System.err.println(EnumLogs.ERREUR.getLogMessage("echec de la creation de " + fullPath_));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		}
@@ -71,9 +72,9 @@ public class FichierUtils {
 		File file = new File(path_);
 		if (!file.exists()) {
 			file.mkdirs();
-			System.out.println(PEnumLogs.INFO.getLogMessage("creation du repertoire " + path_));
+			System.out.println(EnumLogs.INFO.getLogMessage("creation du repertoire " + path_));
 		}else {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage("echec de la creation de " + path_));
+			System.err.println(EnumLogs.ERREUR.getLogMessage("echec de la creation de " + path_));
 			return false;
 		}
 		return true;
@@ -107,14 +108,14 @@ public class FichierUtils {
 			try {
 				// Creation des repertoires.
 				for (Iterator<String> iterator = _listeReps.iterator(); iterator.hasNext();) {
-					String rep = (String) iterator.next();
+					String rep = iterator.next();
 					createRepository(rep);
 				}
 				Thread.sleep(1000);
 				
 				// Creation des fichiers.
 				for (Iterator<String> iterator = _listefiles.iterator(); iterator.hasNext();) {
-					String file = (String) iterator.next();
+					String file = iterator.next();
 					if (file.contains("conf")) {
 						confPath = _listefiles.get(0);
 					}
@@ -123,7 +124,7 @@ public class FichierUtils {
 				Thread.sleep(1000);
 				
 			} catch (InterruptedException e1) {
-				System.err.println(PEnumLogs.ERREUR.getLogMessage(e1.getClass().getName() + " - " + e1.getMessage()));
+				System.err.println(EnumLogs.ERREUR.getLogMessage(e1.getClass().getName() + " - " + e1.getMessage()));
 				new ErrorFrame(e1.getClass().toString(), e1.getStackTrace());
 				return false;
 			}
@@ -131,7 +132,7 @@ public class FichierUtils {
 			createConfFile(confPath, _listeReps);
 			
 		}else {
-			System.err.println(PEnumLogs.WARNING.getLogMessage("le chemin " + path_ + " n'est pas retrouve."));
+			System.err.println(EnumLogs.WARNING.getLogMessage("le chemin " + path_ + " n'est pas retrouve."));
 			removeArbo(path_, null);
 			return false;
 		}
@@ -145,31 +146,31 @@ public class FichierUtils {
 	 *<br/>
 	 * @param path_ void
 	 */
-	public void removeArbo(String path_, Config confObj_){ // D:\DEPLOIE_TEST\EveSports
+	public void removeArbo(String path_, IConfig confObj_){ // D:\DEPLOIE_TEST\EveSports
 		
 		try {
 			
-			System.out.println(PEnumLogs.INFO.getLogMessage("Supression des fichiers de l'arborescence"));
+			System.out.println(EnumLogs.INFO.getLogMessage("Supression des fichiers de l'arborescence"));
 			Files.deleteIfExists(Paths.get(confObj_.get_confRacine() + _ressources.getSepSystem() + "conf.xml"));
 			Files.deleteIfExists(Paths.get(confObj_.get_dbRacine() + _ressources.getSepSystem() + "xml" + _ressources.getSepSystem() + "users.xml"));
 			Thread.sleep(500);
 			
-			System.out.println(PEnumLogs.INFO.getLogMessage("Supression des repertoires de l'arborescence"));
+			System.out.println(EnumLogs.INFO.getLogMessage("Supression des repertoires de l'arborescence"));
 			Files.deleteIfExists(Paths.get(confObj_.get_confRacine()));
 			Files.deleteIfExists(Paths.get(confObj_.get_dbRacine() + _ressources.getSepSystem() + "xml"));
 			Files.deleteIfExists(Paths.get(confObj_.get_dbRacine() + _ressources.getSepSystem() + "csv"));
 			Files.deleteIfExists(Paths.get(confObj_.get_dbRacine()));
 			Thread.sleep(500);
 
-			System.out.println(PEnumLogs.INFO.getLogMessage("Supression du repertoire principal"));
+			System.out.println(EnumLogs.INFO.getLogMessage("Supression du repertoire principal"));
 			Files.deleteIfExists(Paths.get(confObj_.get_appliRacine()));
 			
 			
 		} catch (IOException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (InterruptedException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 	}
@@ -178,7 +179,7 @@ public class FichierUtils {
 		
 		// On recupere les valeurs par defaut:
 		String[] tab = _ressources.getCommonLabel("config.default.values").split(" ");
-		if (!ConfigUtils.getInstance().writeConfigObject(ConfigUtils.getInstance().createConfigObject(tab, listeReps_), path_)) {
+		if (!ConfigTool.getInstance().writeConfigObject(ConfigTool.getInstance().createConfigObject(tab, listeReps_), path_)) {
 			return false;
 		}
 		

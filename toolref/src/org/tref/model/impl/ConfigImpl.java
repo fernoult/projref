@@ -1,9 +1,11 @@
-package org.tref.common.utils;
+package org.tref.model.impl;
 
 import java.io.Serializable;
 
+import org.tref.model.IConfig;
+
 @SuppressWarnings("serial")
-public class Config implements Serializable {
+public class ConfigImpl implements Serializable, IConfig {
 
 	/** Attribut du path principal. */
 	private String _appliRacine;
@@ -20,7 +22,7 @@ public class Config implements Serializable {
 	/**
 	 * Constructeur.
 	 */
-	public Config() {
+	public ConfigImpl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,7 +34,7 @@ public class Config implements Serializable {
 	 * @param _dbRacine
 	 * @param _installed
 	 */
-	public Config(String _appliRacine, String _confRacine, String _dbRacine,
+	public ConfigImpl(String _appliRacine, String _confRacine, String _dbRacine,
 			String _installed) {
 		super();
 		this._appliRacine = _appliRacine;
@@ -41,90 +43,66 @@ public class Config implements Serializable {
 		this._installed = _installed;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.get_appliRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Retourne le path principal.<br/>
-	 *<br/>
-	 * @return String
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#get_appliRacine()
 	 */
+	@Override
 	public String get_appliRacine() {
 		return _appliRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.set_appliRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Initialise le path principal.<br/>
-	 *<br/>
-	 * @param _appliRacine void
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#set_appliRacine(java.lang.String)
 	 */
+	@Override
 	public void set_appliRacine(String _appliRacine) {
 		this._appliRacine = _appliRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.get_confRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Retourne le path de la conf.<br/>
-	 *<br/>
-	 * @return String
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#get_confRacine()
 	 */
+	@Override
 	public String get_confRacine() {
 		return _confRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.set_confRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Initialise le path de la conf.<br/>
-	 *<br/>
-	 * @param _confRacine void
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#set_confRacine(java.lang.String)
 	 */
+	@Override
 	public void set_confRacine(String _confRacine) {
 		this._confRacine = _confRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.get_dbRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Retourne le path des datas.<br/>
-	 *<br/>
-	 * @return String
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#get_dbRacine()
 	 */
+	@Override
 	public String get_dbRacine() {
 		return _dbRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.set_dbRacine()</b><br/>
-	 *
-	 *<b>Description: </b> Initialise le path des datas.<br/>
-	 *<br/>
-	 * @param _dbRacine void
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#set_dbRacine(java.lang.String)
 	 */
+	@Override
 	public void set_dbRacine(String _dbRacine) {
 		this._dbRacine = _dbRacine;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.get_installed()</b><br/>
-	 *
-	 *<b>Description: </b> Retourne l'informatio deja installee.<br/>
-	 *<br/>
-	 * @return String
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#get_installed()
 	 */
+	@Override
 	public String get_installed() {
 		return _installed;
 	}
 	
-	/**
-	 * <b>Methode:  org.se.common.utils.set_installed()</b><br/>
-	 *
-	 *<b>Description: </b> Positionne l'information deja installee.<br/>
-	 *<br/>
-	 * @param _installed void
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.IConfig#set_installed(java.lang.String)
 	 */
+	@Override
 	public void set_installed(String _installed) {
 		this._installed = _installed;
 	}
@@ -160,7 +138,7 @@ public class Config implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Config other = (Config) obj;
+		ConfigImpl other = (ConfigImpl) obj;
 		if (_appliRacine == null) {
 			if (other._appliRacine != null)
 				return false;
@@ -190,7 +168,7 @@ public class Config implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Config [_appliRacine=" + _appliRacine + ", _confRacine="
+		return "ConfigImpl [_appliRacine=" + _appliRacine + ", _confRacine="
 				+ _confRacine + ", _dbRacine=" + _dbRacine + ", _installed="
 				+ _installed + "]";
 	}

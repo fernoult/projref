@@ -1,7 +1,9 @@
-package org.tref.common.resources;
+package org.tref.common.resources.enums;
+
+import org.tref.common.resources.Ressources;
 
 
-public enum PEnumExtensions {
+public enum EnumExtensions {
 
 	XML(".xml", Ressources.getInstance().getXmlDirectory()),
 	TXT(".txt", Ressources.getInstance().getTxtDirectory()),
@@ -16,7 +18,7 @@ public enum PEnumExtensions {
 	 * @param ext_
 	 * @param repo_
 	 */
-	PEnumExtensions(String ext_, String repo_){
+	EnumExtensions(String ext_, String repo_){
 		_ext = ext_;
 		_repo = repo_;
 	}

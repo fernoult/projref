@@ -13,25 +13,25 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.tref.common.resources.PEnumLogs;
+import org.tref.common.exceptions.InternalException;
+import org.tref.common.preferences.PrefsGUI;
 import org.tref.common.resources.Ressources;
-import org.tref.common.utils.InternalException;
-import org.tref.install.Install;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.model.impl.LAndFImpl;
 import org.tref.views.frames.PFrame;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ViewsRessources {
 
 	private static ViewsRessources RES_INSTANCE;
-	private static Ressources COMMON_RESOURCE = Ressources.getInstance();
 	private String[] LAF_LIST; 
-	private static String LAF_PATH = ViewsRessources.class.getPackage().getName() + ".Laf";
+	private static String LAF_PATH = LAndFImpl.class.getPackage().getName() + ".Landf";
 	private static String LIBELLES_PATH = ViewsRessources.class.getPackage().getName() + ".Libelles";
 	private static String FRAMES_PROPS_PATH = PFrame.class.getPackage().getName() + ".PFrame";
-	private ViewPrefs PREFS = ViewPrefs.getInstance();
+	private PrefsGUI PREFS = PrefsGUI.getInstance();
 	private String IMGS_RACINE = ViewsRessources.class.getPackage().getName().replace(".", Ressources.getInstance().getSepProj()) 
 			+ Ressources.getInstance().getSepProj() + "images";
-	private static String ERREUR_PATH = ErrorFrame.class.getPackage().getName() + ".ErrorFrame";
+	private static String ERREUR_PATH = InternalException.class.getPackage().getName() + ".ErrorLabels";
 	
 	
 	private ViewsRessources(){
@@ -50,21 +50,21 @@ public class ViewsRessources {
 	public String getLibelleValue(String key_){
 		String chaine = null;
 		try {
-			chaine = ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+			chaine = ResourceBundle.getBundle(LIBELLES_PATH, PrefsGUI.getInstance().getLocale()).getString(key_);
 			
 		} catch (MissingResourceException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		return chaine;
 	}
 	
 	public String getErrorValue(String key_){
-		return ResourceBundle.getBundle(ERREUR_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+		return ResourceBundle.getBundle(ERREUR_PATH, PrefsGUI.getInstance().getLocale()).getString(key_);
 	}
 	
 	public String getLafValue(String key_){
-		return ResourceBundle.getBundle(LAF_PATH, ViewPrefs.getInstance().getLocale()).getString(key_);
+		return ResourceBundle.getBundle(LAF_PATH, PrefsGUI.getInstance().getLocale()).getString(key_);
 	}
 	
 	public String getPFrameLabel(String key_){
@@ -73,7 +73,7 @@ public class ViewsRessources {
 			chaine = ResourceBundle.getBundle(FRAMES_PROPS_PATH).getString(key_);
 			
 		} catch (MissingResourceException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		return chaine;
@@ -81,7 +81,7 @@ public class ViewsRessources {
 	
 	public String[] getLibelleButtonValues(String key_){
 		// TODO Ca plante ici, tu as un petit probl�me de Local  (en fait d'init de tes pr�f�rences)
-		return ResourceBundle.getBundle(LIBELLES_PATH, ViewPrefs.getInstance().getLocale()).getString(key_).split("@");
+		return ResourceBundle.getBundle(LIBELLES_PATH, PrefsGUI.getInstance().getLocale()).getString(key_).split("@");
 	}
 	
 	public Dimension getSreenSize(){

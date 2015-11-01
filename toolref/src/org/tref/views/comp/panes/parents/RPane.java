@@ -11,7 +11,6 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import org.tref.views.comp.CompRessources;
 import org.tref.views.frames.PFrame;
 
 public class RPane extends JPanel {
@@ -19,8 +18,6 @@ public class RPane extends JPanel {
 	protected PFrame _parentFrame;
 	
 	protected Point _location;
-	
-	protected CompRessources _comRessources;
 	
 	protected void initPane(){
 		

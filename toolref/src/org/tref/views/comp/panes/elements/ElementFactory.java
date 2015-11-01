@@ -7,17 +7,14 @@
  */
 package org.tref.views.comp.panes.elements;
 
-import java.util.ResourceBundle;
-
 import javax.swing.ImageIcon;
 
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
 import org.tref.views.ViewsRessources;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.parents.ComposantPane;
 import org.tref.views.frames.AppFrame;
-import org.tref.views.frames.erreurs.ErrorFrame;
 
 public class ElementFactory {
 
@@ -57,7 +54,7 @@ public class ElementFactory {
 			}
 			
 		} catch (Exception e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			button.setText(values_[1]);
 			return button;
 		}

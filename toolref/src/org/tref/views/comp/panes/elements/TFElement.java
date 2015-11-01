@@ -244,7 +244,7 @@ public class TFElement extends ComposantPane{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 //				_location = e.getLocationOnScreen();													// On recupere la position du curseur au moment du clic.
-//				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAF en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
+//				_parentFrame.get_frames().add(new LafFrame(_location, _textField));						// On instancie la fenetre des LAndFImpl en l'ajoutant a la liste des fenetres dependantes de PrefsFrame.
 //				
 			}
 		});

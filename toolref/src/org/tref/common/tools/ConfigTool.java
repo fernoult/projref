@@ -1,4 +1,4 @@
-package org.tref.common.utils;
+package org.tref.common.tools;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,13 +19,15 @@ import org.jdom2.JDOMException;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.tref.Access;
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.model.IConfig;
+import org.tref.model.impl.ConfigImpl;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
-public class ConfigUtils {
+public class ConfigTool {
 
-	private static ConfigUtils CU_INSTANCE;
+	private static ConfigTool CU_INSTANCE;
 	
 	private InputStream _is;
 	
@@ -37,30 +39,30 @@ public class ConfigUtils {
 	
 	private Ressources _ressources = Ressources.getInstance();
 	
-	private Config _configObj;
+	private IConfig _configObj;
 	
-	private ConfigUtils(){
+	private ConfigTool(){
 		
 	}
 	
-	public static ConfigUtils getInstance(){
+	public static ConfigTool getInstance(){
 		if (CU_INSTANCE == null) {
-			CU_INSTANCE = new ConfigUtils();
+			CU_INSTANCE = new ConfigTool();
 		}
 		return CU_INSTANCE;
 	}
 	
-	public Config getConfigObject(){
+	public IConfig getConfigObject(){
 		
-		Config confObj = new Config();
+		IConfig confObj = new ConfigImpl();
 		Preferences prefs = Preferences.userNodeForPackage(Access.class);
 
 		try {
-			Document document = FichierUtils.getInstance().readXMLFile(prefs.get("CONFIG_PATH", ""), "NOT_LOCAL");
+			Document document = FileTool.getInstance().readXMLFile(prefs.get("CONFIG_PATH", ""), "NOT_LOCAL");
 			Element elem = document.getRootElement();
 			List<Element> liste = elem.getChildren();
 			for (Iterator<Element> iterator = liste.iterator(); iterator.hasNext();) {
-				Element element = (Element) iterator.next();
+				Element element = iterator.next();
 				
 				if (element.getName().equals("INSTALED")) {
 					confObj.set_installed(element.getValue());
@@ -77,10 +79,10 @@ public class ConfigUtils {
 				}
 			}
 		} catch (JDOMException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (IOException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		
@@ -90,21 +92,21 @@ public class ConfigUtils {
 	/**
 	 * <b>Methode:  org.se.common.utils.createConfigObject()</b><br/>
 	 *
-	 *<b>Description: </b> Cree et renvoit un objet Config a partir des parametres passes a la methode.<br/>
+	 *<b>Description: </b> Cree et renvoit un objet ConfigImpl a partir des parametres passes a la methode.<br/>
 	 *<br/>
 	 * @param configTab_
-	 * @return Config
+	 * @return ConfigImpl
 	 */
-	public Config createConfigObject(String[] configTab_, ArrayList<String> listeReps_){
+	public IConfig createConfigObject(String[] configTab_, ArrayList<String> listeReps_){
 		
 		// Cration de l'objet de conf.
 		
-		Config confObj = new Config();
+		IConfig confObj = new ConfigImpl();
 		
 		confObj.set_installed(configTab_[3]);
 		
 		for (Iterator<String> iterator = listeReps_.iterator(); iterator.hasNext();) {
-			String rep = (String) iterator.next();
+			String rep = iterator.next();
 			
 			if (!rep.contains("conf") && !rep.contains("xml") && !rep.contains("csv")) {
 				confObj.set_appliRacine(rep);
@@ -118,7 +120,7 @@ public class ConfigUtils {
 		return confObj;
 	}
 	
-	public boolean writeConfigObject(Config confObj_, String path_){
+	public boolean writeConfigObject(IConfig confObj_, String path_){
 		
 		String confxml = _ressources.getSepProj() + _ressources.getXmlDirectory() + _ressources.getSepProj() + "users.xml";	// Chemin du fichier xml
 
@@ -126,7 +128,7 @@ public class ConfigUtils {
 		Document document = null;
 		Element racine = null;
 		try {
-			document = FichierUtils.getInstance().readXMLFile(confxml, "LOCAL");
+			document = FileTool.getInstance().readXMLFile(confxml, "LOCAL");
 			racine = document.getRootElement();
 		} catch (JDOMException jdomexcep) {
 			JOptionPane.showMessageDialog(null, jdomexcep.getMessage() + "\nChemin : " + confxml);
@@ -157,11 +159,11 @@ public class ConfigUtils {
 		try {
 			outputter.output(document, new FileOutputStream(path_));
 		} catch (FileNotFoundException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		} catch (IOException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 			return false;
 		}
@@ -170,11 +172,11 @@ public class ConfigUtils {
 	}
 
 
-	public Config get_configObj() {
+	public IConfig get_configObj() {
 		return _configObj;
 	}
 
-	public void set_configObj(Config _configObj) {
+	public void set_configObj(IConfig _configObj) {
 		this._configObj = _configObj;
 	}
 	

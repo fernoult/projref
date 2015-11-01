@@ -9,15 +9,13 @@ package org.tref.views.frames.erreurs;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import org.tref.views.comp.panes.InternalExceptionPane;
-import org.tref.views.frames.AppFrame;
 
 /**Infos:</br>
  * Classe PRSErrorFrame.java</br>
@@ -68,7 +66,7 @@ public class ErrorFrame extends JFrame{
 
 		setSize(500, 100);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setVisible(true);
 
 	}

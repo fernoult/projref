@@ -22,9 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import org.tref.common.preferences.PrefsGUI;
 import org.tref.common.resources.Ressources;
 import org.tref.views.ViewsRessources;
-import org.tref.views.ViewPrefs;
 import org.tref.views.comp.ElementEnum;
 import org.tref.views.comp.panes.elements.BTElement;
 import org.tref.views.comp.panes.elements.ElementFactory;
@@ -148,7 +148,7 @@ public class LanguePane extends JPanel {
 			});
 			String btnn = btn.getName();
 			String btnttt = btn.getToolTipText();
-			if (btn.getName().equals(ViewPrefs.getInstance().getLocale().getCountry())) {
+			if (btn.getName().equals(PrefsGUI.getInstance().getLocale().getCountry())) {
 				_choix.setText(_prefixe + btn.getToolTipText());
 			}
 			_btElement.addButton(btn);

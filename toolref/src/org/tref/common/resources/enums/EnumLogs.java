@@ -1,9 +1,11 @@
-package org.tref.common.resources;
+package org.tref.common.resources.enums;
 
 import java.text.MessageFormat;
 
+import org.tref.common.resources.Ressources;
 
-public enum PEnumLogs {
+
+public enum EnumLogs {
 
 	ERREUR ("ERREUR"),
 	SUCCESS ("SUCCES"),
@@ -22,7 +24,7 @@ public enum PEnumLogs {
 	 * Constructeur.
 	 * @param type_
 	 */
-	PEnumLogs(String type_){
+	EnumLogs(String type_){
 		_type = type_;
 	}
 	

@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.tref.common.resources.PEnumLogs;
+import org.tref.application.InstallManager;
+import org.tref.common.preferences.PrefsGUI;
 import org.tref.common.resources.Ressources;
-import org.tref.common.utils.Config;
-import org.tref.common.utils.ConfigUtils;
-import org.tref.common.utils.FichierUtils;
-import org.tref.install.Install;
-import org.tref.views.ViewPrefs;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.common.tools.ConfigTool;
+import org.tref.common.tools.FileTool;
+import org.tref.model.IConfig;
 import org.tref.views.frames.ExploraterFrame;
 import org.tref.views.frames.erreurs.ErrorFrame;
 import org.tref.views.frames.splash.RunSplashScreen;
@@ -26,30 +26,34 @@ import org.tref.views.frames.splash.RunSplashScreen;
 
 public class Access {
 	
-	/** Objet de conf. */
-	private static Config _confObj;
-	
-	/**  */
-	private static String [] _defaultConfigValues = Ressources.getInstance().getCommonLabel("config.default.values").split(" ");
-	
-	/**  */
+	/** Les ressources. */
 	private static Ressources _ressources = Ressources.getInstance();
 	
-	/**	<b>Methode: 	fre.gena.main()</b><br/>
-	 * <b>Description: </b><br/>
+	/**
+	 * 
+	 * <b>Methode: org.tref.main()</b><br/>
 	 *
-	 * <br/><br/>
-	 * @param args void
+	 * <b>Description: </b> <br/>
+	 * 		Le main de l'application.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
+	 * @param args
 	 */
 	public static void main(String[] args) {
 	
-		// Actions d'usage au demarrage.
+		// On initialise les Préférences.
+		PrefsGUI.getInstance().initPrefs();
 		
-		ViewPrefs.getInstance().initPrefs();
-		checkAlreadyRunning();			// On verifie si une instance de l'application n'est pas deja lancee.
-		fixLookAndFeel();				// On positionne le LookAnd Feel de l'application.
-		checkArguments(args);			// On verifie les arguments passe au lancement de l'application.
-		checkAlreadyInstalled();		// On verifie si l'application a deja etee installee sur le poste.
+		// On initialise les attributs de ressources.
+		initResourcesAttributes();
+		
+		// On verifie qu'une autre instance de l'appli ne tourne pas deja,
+		// on positionne le LookAndFeel, check les arguments et check si l'application
+		// n'est pas deja installee sur le poste.
+		checkAlreadyRunning();			
+		fixLookAndFeel();				
+		checkArguments(args);			
+		checkAlreadyInstalled();		
 		
 		System.out.println("===================================================================================================");
 		
@@ -58,14 +62,16 @@ public class Access {
 	    splash.showSplashAndExit();	
 		new ExploraterFrame("EXPLO");
 		
-		
 	}
 	
 	/**
-	 * 	<b>Methode: 	fre.gena.checkAlreadyRunning()</b><br/>
-	 * <b>Description: Verifie qu'une instance de l'appli n'est pas deja lancee.</b><br/>
+	 * 
+	 * <b>Methode: org.tref.checkAlreadyRunning()</b><br/>
 	 *
-	 * <br/><br/> void
+	 * <b>Description: </b> <br/>
+	 * 		Verifie qu'une instance de l'appli n'est pas deja lancee.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
 	 */
 	@SuppressWarnings({ "resource" })
 	private static void checkAlreadyRunning(){
@@ -77,12 +83,12 @@ public class Access {
 			ServerSocket servsock = new ServerSocket(Ressources.LAUNCH_PORT);
 			
 			// Affichage du log en console.
-			System.out.println(PEnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.AlreadyRunning.text") + servsock.getLocalPort()));
+			System.out.println(EnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.AlreadyRunning.text") + servsock.getLocalPort()));
 			
 		} catch (IOException e) {
 			
 			// Affichage du log en console.
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(Ressources.ALREADY_RUN_MESSAGE));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(Ressources.ALREADY_RUN_MESSAGE));
 			
 			// Positionne le LookAndFeel.
 			fixLookAndFeel();
@@ -98,11 +104,14 @@ public class Access {
 	}
 	
 	/**
-	 * <b>Methode:  org.se.checkAlreadyInstalled()</b><br/>
+	 * 
+	 * <b>Methode: org.tref.checkAlreadyInstalled()</b><br/>
 	 *
-	 *<b>Description: </b> Verifie si l'application a deja ete installee.<br/>
-	 *	Si oui, elle se lance, si non, elle s'installe.<br/>
-	 *<br/> void
+	 * <b>Description: </b> <br/>
+	 * 		Verifie si l'application a deja ete installee.<br/>
+	 *		Si oui, elle se lance, si non, elle s'installe.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
 	 */
 	private static void checkAlreadyInstalled() {
 		
@@ -110,33 +119,36 @@ public class Access {
 		String flag = Ressources.ALREADY_INSTALLED;
 		
 		// Affichage du log en console.
-		System.out.println(PEnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.AlreadyInstalled.text") + prefs.getBoolean(flag, true)));
+		System.out.println(EnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.AlreadyInstalled.text") + prefs.getBoolean(flag, true)));
 		
 			if (prefs.getBoolean(flag, true)) {
 				prefs.putBoolean(flag, false);
 				try {
 					prefs.flush();
 				} catch (BackingStoreException bse) {
-					System.err.println(PEnumLogs.ERREUR.getLogMessage(bse.getClass().getName() + " - " + bse.getMessage()));
+					System.err.println(EnumLogs.ERREUR.getLogMessage(bse.getClass().getName() + " - " + bse.getMessage()));
 					new ErrorFrame(bse.getClass().toString(), bse.getStackTrace());
 				}
-				Install.getInstance().install();
+				InstallManager.getInstance().install();
 			}
 
 	}
 
 	/**
-	 * 	<b>Methode: 	fre.gena.checkArguments()</b><br/>
-	 * <b>Description: Verifie les arguments passes en parametres.</b><br/>
+	 * 
+	 * <b>Methode: org.tref.checkArguments()</b><br/>
 	 *
-	 * <br/><br/>
-	 * @param args_ void
+	 * <b>Description: </b> <br/>
+	 * 		Verifie les arguments passes en parametres.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
+	 * @param args_
 	 */
 	private static void checkArguments(String[] args_){
 
 		// Affichage du log en console.
 		Object[] tab = {args_.length};
-		System.out.println(PEnumLogs.INFO.getLogMessage(MessageFormat.format(_ressources.getLogsLabel("logs.install.CheckArguments.text"), tab)));
+		System.out.println(EnumLogs.INFO.getLogMessage(MessageFormat.format(_ressources.getLogsLabel("logs.install.CheckArguments.text"), tab)));
 		
 		// Si il y a u argument au lancement:
 		if (args_ != null && args_.length > 0 && args_.length < 2) {
@@ -148,13 +160,13 @@ public class Access {
 				File file = new File(System.getProperty("user.home") + Ressources.getInstance().getSepProj() + "DEPLOIE_TEST");
 				
 				if (file.exists()) {
-					Install.getInstance().setFileChooserPath(file.getAbsolutePath());	
+					InstallManager.getInstance().setFileChooserPath(file.getAbsolutePath());	
 				}else {
 					try {
 						file.createNewFile();
-						Install.getInstance().setFileChooserPath(file.getAbsolutePath());
+						InstallManager.getInstance().setFileChooserPath(file.getAbsolutePath());
 					} catch (IOException e) {
-						System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+						System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 						new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 					}
 				}
@@ -163,11 +175,11 @@ public class Access {
 			case "remove":
 				
 				// Remove du parametre des preferences JVM.
-				Install.getInstance().removePrefs();
+				InstallManager.getInstance().removePrefs();
 
 				// Detruit l'arborescence deployee.
-				Config conf = ConfigUtils.getInstance().getConfigObject();
-				FichierUtils.getInstance().removeArbo(conf.get_appliRacine(), conf);
+				IConfig conf = ConfigTool.getInstance().getConfigObject();
+				FileTool.getInstance().removeArbo(conf.get_appliRacine(), conf);
 				
 				JOptionPane.showMessageDialog(null, _ressources.getCommonLabel("popup.desinstallation.message.text"), 
 						_ressources.getCommonLabel("popup.desinstallation.titre.text"), JOptionPane.INFORMATION_MESSAGE);
@@ -181,20 +193,23 @@ public class Access {
 	}
 	
 	/**
-	 * 	<b>Methode: 	fre.gena.fixLookAndFeel()</b><br/>
-	 * <b>Description: Positionne le LookAndFeel par defaut.</b><br/>
+	 * 
+	 * <b>Methode: org.tref.fixLookAndFeel()</b><br/>
 	 *
-	 * <br/><br/> void
+	 * <b>Description: </b> <br/>
+	 * 		Positionne le LookAndFeel par defaut.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
 	 */
 	private static void fixLookAndFeel(){
 		
 		// Affichage du log en console.
-		System.out.println(PEnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.LookAndFeel.text")));
+		System.out.println(EnumLogs.INFO.getLogMessage(_ressources.getLogsLabel("logs.install.LookAndFeel.text")));
 		
 		try {
 			
-			// On positione le LAF par defaut.
-			UIManager.setLookAndFeel(ViewPrefs.getInstance().getLAF());
+			// On positione le LAndFImpl par defaut.
+			UIManager.setLookAndFeel(PrefsGUI.getInstance().getLAF());
 			
 			UIManager.put("ProgressBar.background", Color.WHITE);
 			UIManager.put("ProgressBar.foreground", Color.decode("#0B3861"));
@@ -202,18 +217,33 @@ public class Access {
 			UIManager.put("ProgressBar.selectionForeground",Color.decode("#CEE3F6"));
 			
 		} catch (ClassNotFoundException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (InstantiationException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (IllegalAccessException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		} catch (UnsupportedLookAndFeelException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
+	}
+	
+	/**
+	 * 
+	 * <b>Methode: org.tref.initResourcesAttributes()</b><br/>
+	 *
+	 * <b>Description: </b> <br/>
+	 * 		Initialise les attributs de ressources.<br/>
+	 * <b>Tags: </b> <br/>
+	 * <br/>
+	 */
+	private static void initResourcesAttributes(){
+		
+		// Init des ressources.
+		_ressources = Ressources.getInstance();
 	}
 
 }

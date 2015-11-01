@@ -7,17 +7,10 @@
 
 package org.tref.views.comp.panes;
 
-import java.awt.Desktop;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import javax.swing.ImageIcon;
 
-import org.tref.common.resources.PEnumLogs;
+import org.tref.common.exceptions.InternalException;
 import org.tref.common.resources.Ressources;
-import org.tref.common.utils.InternalException;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
 /**Infos:</br>
@@ -66,8 +59,8 @@ public class InternalExceptionPane extends ExceptionPane {
     private void initInternalExceptionPane() {
 	
 	_icone.setIcon(new ImageIcon(getClass().getResource(_vresources.getImgsPath() + Ressources.getInstance().getSepProj() 
-			+ _vresources.getErrorValue("ErreurFrame.Message.Icone.Value"))));
-	_messageLibelle.setText(_vresources.getErrorValue("ErreurFrame.Message.Text.Value"));
+			+ _vresources.getErrorValue("ErreurLabel.Message.Icone.Value"))));
+	_messageLibelle.setText(_vresources.getErrorValue("ErreurLabel.Message.Text.Value"));
 	_cause.setText(_excepMessage);
 	
 	StringBuffer buf = new StringBuffer();

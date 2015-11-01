@@ -1,17 +1,18 @@
-package org.tref.views;
+package org.tref.common.preferences;
 
 import java.util.Locale;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.tref.Access;
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.views.ViewsRessources;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
-public class ViewPrefs {
+public class PrefsGUI {
 
-	private static ViewPrefs PREFS_INSTANCE;
+	private static PrefsGUI PREFS_INSTANCE;
 	
 	private Locale _locale;
 	
@@ -23,15 +24,15 @@ public class ViewPrefs {
 	
 	private static final String LANGUE = "LANGUE";
 	
-	private ViewPrefs() {
+	private PrefsGUI() {
 		
 	}
 	
-	public static ViewPrefs getInstance(){
+	public static PrefsGUI getInstance(){
 		
 		// Le singleton qui va bien.
 		if (PREFS_INSTANCE == null) {
-			PREFS_INSTANCE = new ViewPrefs();
+			PREFS_INSTANCE = new PrefsGUI();
 		}
 		
 		return PREFS_INSTANCE;
@@ -46,7 +47,7 @@ public class ViewPrefs {
 		_locale = new Locale(langue, country);
 		_laf = prefs.get(THEMES, "com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 		
-		System.out.println("LAF DANS LES PREFS : " + _laf);
+		System.out.println("LAndFImpl DANS LES PREFS : " + _laf);
 		System.out.println("LOCALE DANS LES PREFS : " + langue + " " + country);
 
 		ViewsRessources.getInstance().setLocale(_locale);
@@ -61,7 +62,7 @@ public class ViewPrefs {
 			prefs.flush();
 			
 		} catch (BackingStoreException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		
@@ -76,7 +77,7 @@ public class ViewPrefs {
 			prefs.flush();
 			
 		} catch (BackingStoreException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		

@@ -1,99 +1,83 @@
-/* ihmref-LAF.java
+/* ihmref-LAndFImpl.java
  * HISTORIQUE
  *
  * [MODIF]: Version - le 9 avr. 2015 - Creation de la classe.
  *
  * FIN HISTORIQUE
  */
-package org.tref.views;
+package org.tref.model.impl;
+
+import org.tref.model.ILAndF;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
 
-public class LAF {
+public class LAndFImpl implements ILAndF {
 
 	private String _lafName;
 	private String _lafPath;
 	private AbstractLookAndFeel _lafObject;
 	
-	/** LAF
+	/** LAndFImpl
 	 * Constructeur
 	 */
-	public LAF() {
+	public LAndFImpl() {
 		super();
 	}
 	
-	/** LAF
+	/** LAndFImpl
 	 * Constructeur
 	 */
-	public LAF(String lafName_, String lafPath_, AbstractLookAndFeel lafObject_) {
+	public LAndFImpl(String lafName_, String lafPath_, AbstractLookAndFeel lafObject_) {
 		super();
 		_lafName = lafName_;
 		_lafPath = lafPath_;
 		_lafObject = lafObject_;
 	}
 
-	/** Methode getLafName();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
-	 * 
-	 * @return the lafName
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#getLafName()
 	 */
+	@Override
 	public String getLafName() {
 		return _lafName;
 	}
 
-	/** Methode setLafName();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * String LAF.java
-	 * 
-	 * @return the lafName
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#setLafName(java.lang.String)
 	 */
+	@Override
 	public void setLafName(String lafName_) {
 		_lafName = lafName_;
 	}
 
-	/** Methode getLafPath();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
-	 * 
-	 * @return the lafPath
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#getLafPath()
 	 */
+	@Override
 	public String getLafPath() {
 		return _lafPath;
 	}
 
-	/** Methode setLafPath();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * String LAF.java
-	 * 
-	 * @return the lafPath
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#setLafPath(java.lang.String)
 	 */
+	@Override
 	public void setLafPath(String lafPath_) {
 		_lafPath = lafPath_;
 	}
 
-	/** Methode getLafObject();
-	 * [DESCRIPTION]:
-	 * Cette methode retourne (le/la/les) </br></br>
-	 * 
-	 * @return the lafObject
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#getLafObject()
 	 */
+	@Override
 	public AbstractLookAndFeel getLafObject() {
 		return _lafObject;
 	}
 
-	/** Methode setLafObject();
-	 * [DESCRIPTION]:
-	 * Cette methode initialise (le/la/les) </br></br>
-	 * [PARAMETRES]:
-	 * AbstractLookAndFeel LAF.java
-	 * 
-	 * @return the lafObject
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#setLafObject(com.jtattoo.plaf.AbstractLookAndFeel)
 	 */
+	@Override
 	public void setLafObject(AbstractLookAndFeel lafObject_) {
 		_lafObject = lafObject_;
 	}
@@ -101,6 +85,9 @@ public class LAF {
 	/* Methodes overridee de sa classe mere.
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
+	 */
+	/* (non-Javadoc)
+	 * @see org.tref.model.impl.ILAndF#hashCode()
 	 */
 	@Override
 	public int hashCode() {
@@ -127,7 +114,7 @@ public class LAF {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LAF other = (LAF) obj;
+		LAndFImpl other = (LAndFImpl) obj;
 		if (_lafName == null) {
 			if (other._lafName != null)
 				return false;
@@ -152,7 +139,7 @@ public class LAF {
 	 */
 	@Override
 	public String toString() {
-		return "LAF [_lafName=" + _lafName + ", _lafPath=" + _lafPath
+		return "LAndFImpl [_lafName=" + _lafName + ", _lafPath=" + _lafPath
 				+ ", _lafObject=" + _lafObject + "]";
 	}
 	

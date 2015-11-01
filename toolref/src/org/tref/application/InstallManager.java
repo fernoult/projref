@@ -1,4 +1,4 @@
-package org.tref.install;
+package org.tref.application;
 
 import java.util.ResourceBundle;
 import java.util.prefs.BackingStoreException;
@@ -8,24 +8,24 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.tref.Access;
-import org.tref.common.resources.PEnumLogs;
 import org.tref.common.resources.Ressources;
-import org.tref.common.utils.FichierUtils;
+import org.tref.common.resources.enums.EnumLogs;
+import org.tref.common.tools.FileTool;
 import org.tref.views.frames.erreurs.ErrorFrame;
 
-public class Install {
+public class InstallManager {
 
 	/** Instance de la classe de ressources. */
 	private static final Ressources RESSOURCES = Ressources.getInstance();
 	
 	/** Attribut static du singleton de la classe nstaller. */
-	private static Install INSTALL_INSTANCE;
+	private static InstallManager INSTALL_INSTANCE;
 	
 	/** Constante du nom du repertoire prncipal de l'installation. */
 	private static final String APPLI_NAME = "ProjRef";
 	
 	/** Chemin du fichier de properties de l'installer. */
-	private static final String INSTALL_PROPS = Install.class.getPackage().getName() + ".Install";
+	private static final String INSTALL_PROPS = InstallManager.class.getPackage().getName() + ".Install";
 	
 	/** Bundle d'access aux proprietes de l'installer. */
 	private static final ResourceBundle INSTALL_BUNDLE = ResourceBundle.getBundle(INSTALL_PROPS);
@@ -43,7 +43,7 @@ public class Install {
 	/**
 	 * Constructeur prive.
 	 */
-	private Install(){
+	private InstallManager(){
 		
 	}
 	
@@ -55,13 +55,13 @@ public class Install {
 	 *<br/>
 	 * @return Installer
 	 */
-	public static Install getInstance(){
+	public static InstallManager getInstance(){
 		
 		// Si l'instance de la classe Installer est nulle:
 		if (INSTALL_INSTANCE == null) {
 			
 			// Instanciation de la Classe installer.
-			INSTALL_INSTANCE = new Install();
+			INSTALL_INSTANCE = new InstallManager();
 		}
 		
 		// Retourne la classe Installer.
@@ -98,12 +98,12 @@ public class Install {
 		if (deploie()) {
 			
 			// Affichage du log en console.
-			System.out.println(PEnumLogs.SUCCESS.getLogMessage("Succes de l'installation."));
+			System.out.println(EnumLogs.SUCCESS.getLogMessage("Succes de l'installation."));
 			
 		}else { // Sinon:
 			
 			// Affichage du log en console.
-			System.err.println(PEnumLogs.ERREUR.getLogMessage("echec de l'installation."));
+			System.err.println(EnumLogs.ERREUR.getLogMessage("echec de l'installation."));
 			
 			// PopUp d'erreur affichee a l'ecran.
 			JOptionPane.showMessageDialog(null, INSTALL_BUNDLE.getString("installer.message.erreurInstall.text"), 
@@ -130,7 +130,7 @@ public class Install {
 				return false;
 			}
 		} catch (BackingStoreException e) {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
+			System.err.println(EnumLogs.ERREUR.getLogMessage(e.getClass().getName() + " - " + e.getMessage()));
 			new ErrorFrame(e.getClass().toString(), e.getStackTrace());
 		}
 		return true;
@@ -145,7 +145,7 @@ public class Install {
 	public void removePrefs() {
 		
 		PREFS.remove(FLAG);
-		System.out.println(PEnumLogs.INFO.getLogMessage(" Remove des preferences."));
+		System.out.println(EnumLogs.INFO.getLogMessage(" Remove des preferences."));
 	}
 
 	/**
@@ -177,8 +177,8 @@ public class Install {
 			INSTALL_PATH = path + RESSOURCES.getSepSystem() + APPLI_NAME;
 			
 			// On declenche la creation de l'arborescnece.
-			if (!FichierUtils.getInstance().createArbo(path + RESSOURCES.getSepSystem() + APPLI_NAME)) {
-				System.out.println(PEnumLogs.WARNING.getLogMessage(INSTALL_PATH));
+			if (!FileTool.getInstance().createArbo(path + RESSOURCES.getSepSystem() + APPLI_NAME)) {
+				System.out.println(EnumLogs.WARNING.getLogMessage(INSTALL_PATH));
 				return false;
 			}else {
 				getInstance().getPREFS().put("CONFIG_PATH", path + RESSOURCES.getSepSystem() + APPLI_NAME + 
@@ -186,7 +186,7 @@ public class Install {
 			}
 			
 		}else {
-			System.err.println(PEnumLogs.ERREUR.getLogMessage("deploie FAIL!"));
+			System.err.println(EnumLogs.ERREUR.getLogMessage("deploie FAIL!"));
 			return false;
 		}
 

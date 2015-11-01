@@ -23,7 +23,8 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import org.tref.common.resources.Ressources;
-import org.tref.views.LAF;
+import org.tref.model.ILAndF;
+import org.tref.model.impl.LAndFImpl;
 import org.tref.views.ViewsRessources;
 import org.tref.views.comp.tables.LafTable;
 import org.tref.views.comp.tables.models.LafTableModel;
@@ -111,12 +112,12 @@ public class LafPane extends JPanel {
 	private void initLafTable(){
 		
 		String[] tabLAF = ViewsRessources.getInstance().getLafAvaible();
-		ArrayList<LAF> lafList = new ArrayList<>();
+		ArrayList<LAndFImpl> lafList = new ArrayList<>();
 		
 		for (int i = 0; i < tabLAF.length; i++) {
 			String lafname = tabLAF[i].substring(0, tabLAF[i].lastIndexOf("."));
 			String lafPath = ViewsRessources.getInstance().getPrefixLaf() + tabLAF[i];
-			LAF laf = new LAF(lafname, lafPath, new AbstractLookAndFeel() {
+			LAndFImpl lAndFImpl = new LAndFImpl(lafname, lafPath, new AbstractLookAndFeel() {
 				@Override
 				public AbstractIconFactory getIconFactory() {
 					return null;
@@ -127,7 +128,7 @@ public class LafPane extends JPanel {
 				}
 			});
 			
-			lafList.add(laf);
+			lafList.add(lAndFImpl);
 			
 		}
 		
@@ -149,8 +150,8 @@ public class LafPane extends JPanel {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				
-				LAF laf = ((LafTableModel)_lafTable.getModel()).getLAFObject(_lafTable.rowAtPoint(e.getPoint()));
-				_lafImage.setIcon(new ImageIcon(getClass().getResource(prefix + laf.getLafName() + suffix)));
+				ILAndF lAndFImpl = ((LafTableModel)_lafTable.getModel()).getLAFObject(_lafTable.rowAtPoint(e.getPoint()));
+				_lafImage.setIcon(new ImageIcon(getClass().getResource(prefix + lAndFImpl.getLafName() + suffix)));
 			}
 			
 			@Override
@@ -183,8 +184,8 @@ public class LafPane extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				LAF laf = ((LafTableModel)_lafTable.getModel()).getLAFObject(_lafTable.rowAtPoint(e.getPoint()));
-				_lafTF.setText(laf.getLafPath());
+				ILAndF lAndFImpl = ((LafTableModel)_lafTable.getModel()).getLAFObject(_lafTable.rowAtPoint(e.getPoint()));
+				_lafTF.setText(lAndFImpl.getLafPath());
 				_lafTF.revalidate();
 				
 				_lafFrame.dispose();
